@@ -40,7 +40,8 @@ export default function Home() {
             textShadow: "0 0 15px rgba(255,255,255,0.15)",
           }}
         >
-          Welcome to my portfolio.<br />I'm Simone.
+          Welcome to my portfolio.<br />
+          I'm Simone.
         </Heading>
 
         <Text
@@ -207,7 +208,8 @@ export default function Home() {
               A full-stack financial platform developed with Python, JavaScript,
               and SQL to optimize internal workflows. The site features secure
               authentication, structured database design, and a responsive admin
-              dashboard to manage client accounts, payrolls, and transactions efficiently.
+              dashboard to manage client accounts, payrolls, and transactions
+              efficiently.
             </Text>
           </Column>
 
@@ -244,10 +246,10 @@ export default function Home() {
 
             <Text onBackground="neutral-medium">
               A web platform built with React and Firebase, integrating Google
-              Maps API and Stripe payments to connect tutors and students locally.
-              It features ZIP-based location search, price filtering, real-time
-              booking, and user authentication — blending functional design with
-              clean, intuitive interfaces.
+              Maps API and Stripe payments to connect tutors and students
+              locally. It features ZIP-based location search, price filtering,
+              real-time booking, and user authentication — blending functional
+              design with clean, intuitive interfaces.
             </Text>
           </Column>
 
@@ -312,8 +314,8 @@ export default function Home() {
         <Heading variant="display-strong-l">Contact Me</Heading>
 
         <Text onBackground="neutral-medium" style={{ maxWidth: "600px" }}>
-          Interested in collaborating, hiring, or just want to say hi? I’d love to
-          connect.
+          Interested in collaborating, hiring, or just want to say hi? I’d love
+          to connect.
         </Text>
 
         <Column gap="m" align="center" style={{ marginTop: "20px" }}>
@@ -342,9 +344,10 @@ export default function Home() {
             🔗 linkedin.com/in/simonee8420
           </a>
 
+          {/* ✅ UPDATED RESUME LINK (matches file in /public exactly) */}
           <a
             id="resume"
-            href="/OCT_5_RESUME.pdf"
+            href="/SIMONE_LATTIMORE_RESUME (1).pdf"
             target="_blank"
             rel="noopener noreferrer"
             style={{
