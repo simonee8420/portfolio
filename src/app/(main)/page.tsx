@@ -199,7 +199,7 @@ export default function Home() {
                 boxShadow: "0 0 35px rgba(255,215,0,0.25)",
               }}
               title="Hive Financial Systems Site Preview"
-            ></iframe>
+            />
 
             <Heading variant="heading-default-l" marginBottom="12">
               Hive Financial System Site
@@ -345,7 +345,7 @@ export default function Home() {
             🔗 linkedin.com/in/simonee8420
           </a>
 
-          {/* ✅ UPDATED RESUME LINK (matches file in /public exactly) */}
+          {/* ✅ Resume link (must match /public file name EXACTLY) */}
           <a
             id="resume"
             href="/SIMONE_LATTIMORE_RESUME.pdf"
