@@ -25,6 +25,7 @@
     "@types/node": "20.17.23",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
+    "eslint": "^9.39.2",
     "typescript": "5.8.2"
   },
   "overrides": {
