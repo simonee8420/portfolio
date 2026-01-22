@@ -40,7 +40,8 @@ export default function Home() {
             textShadow: "0 0 15px rgba(255,255,255,0.15)",
           }}
         >
-          Welcome to my portfolio.<br />
+          Welcome to my portfolio.
+          <br />
           I'm Simone.
         </Heading>
 
@@ -347,7 +348,7 @@ export default function Home() {
           {/* ✅ UPDATED RESUME LINK (matches file in /public exactly) */}
           <a
             id="resume"
-            href="/SIMONE_LATTIMORE_RESUME (1).pdf"
+            href="/SIMONE_LATTIMORE_RESUME.pdf"
             target="_blank"
             rel="noopener noreferrer"
             style={{
