@@ -12,7 +12,6 @@ export default function Home() {
         minHeight: "100vh",
         color: "white", 
         textAlign: "center",
-        transition: "opacity 0.6s ease-in-out",
       }}
       gap="xl"
     >
@@ -35,40 +34,34 @@ export default function Home() {
         <Heading
           variant="display-strong-xl"
           marginTop="20"
-          className="float"
           style={{
-            color: "#FFFFFF", // Brightest white
+            color: "#FFFFFF",
             textShadow: "0 0 20px rgba(255,255,255,0.4)",
           }}
         >
           Welcome to my portfolio.
           <br />
-          I&apos;m Simone.
+          I&apos;m Simone A. Lattimore.
         </Heading>
 
         <Text
           variant="heading-default-l"
           wrap="balance"
           marginBottom="16"
-          className="float-delay"
           style={{
             color: "#FFFFFF",
             textShadow: "0 0 12px rgba(255,255,255,0.3)",
           }}
         >
-          I&apos;m an inspired UI/UX researcher and software engineer.
+          Computer Science graduate & incoming UI/UX researcher and designer.
         </Text>
 
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Button
-            id="explore"
             href="#projects"
-            data-border="rounded"
             weight="default"
-            arrowIcon
             style={{
               marginTop: "12px",
-              transform: "translateX(-2px)",
               boxShadow: "0 0 15px rgba(255,255,255,0.25)",
             }}
           >
@@ -107,17 +100,16 @@ export default function Home() {
             flexWrap: "wrap",
           }}
         >
-          {/* PROFILE PICTURE */}
           <img
             src="/images/og/profile.jpg"
-            alt="Simone Lattimore Profile"
+            alt="Simone Lattimore"
             style={{
               width: "200px",
               height: "200px",
               borderRadius: "50%",
               objectFit: "cover",
               boxShadow: "0 0 25px rgba(255,255,255,0.25)",
-              marginRight: "50px",
+              marginRight: "20px",
             }}
           />
 
@@ -127,20 +119,12 @@ export default function Home() {
               maxWidth: "550px",
               lineHeight: "1.8",
               textAlign: "left",
-              marginLeft: "30px",
             }}
           >
-            Hi 👋 I&apos;m <b>Simone Lattimore</b>. <br />
-            I am a future UI/UX researcher and software engineer passionate about
-            crafting modern, accessible digital experiences. With experience
-            across front-end development, data-driven design, and IT
-            infrastructure, I blend creativity with clean, efficient code. I&apos;m
-            also a recent graduate from Georgia State University, where I built
-            projects that connected design with real-world problem solving.
-            <br />
-            <br />
-            When I&apos;m not coding or designing, I love exploring new tech trends,
-            mentoring peers, and refining my personal design systems.
+            I&apos;m a <b>Georgia State University</b> Computer Science graduate dedicated to understanding the psychological principles behind digital interaction[cite: 70, 73]. 
+            I apply programming and behavioral research to design accessible tools that align with human cognition by studying how users process information in digital environments[cite: 71].
+            <br /><br />
+            With a GPA of <b>3.47/4.00</b> and experience ranging from IT infrastructure to graphic design, I focus on building software that solves real-world problems with a human-centered approach[cite: 75, 87, 113].
           </Text>
         </Column>
       </Column>
@@ -152,29 +136,12 @@ export default function Home() {
         id="projects"
         align="center"
         gap="xl"
-        style={{
-          marginTop: "20px",
-          width: "100%",
-          scrollMarginTop: "80px",
-        }}
+        style={{ width: "100%", scrollMarginTop: "80px" }}
       >
-        <Heading
-          variant="display-strong-l"
-          marginBottom="48"
-          style={{ textShadow: "0 0 10px rgba(255,255,255,0.1)" }}
-        >
-          Featured Projects
-        </Heading>
+        <Heading variant="display-strong-l" marginBottom="48">Featured Projects</Heading>
 
-        <Column
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "70px",
-          }}
-        >
-          {/* ===== Hive Calendar Project ===== */}
+        <Column gap="70" align="center">
+          {/* Hive Calendar Project */}
           <Column
             background="neutral-strong"
             padding="l"
@@ -183,44 +150,17 @@ export default function Home() {
               width: "80%",
               maxWidth: "850px",
               boxShadow: "0 0 40px rgba(255,215,0,0.15)",
-              padding: "35px",
-              alignItems: "center",
-              backdropFilter: "blur(10px)",
               border: "1px solid rgba(255,255,255,0.08)",
             }}
           >
-            <iframe
-              src="https://hivefs-meetingrooms.netlify.app/"
-              width="100%"
-              height="400"
-              style={{
-                border: "none",
-                borderRadius: "16px",
-                marginBottom: "20px",
-                boxShadow: "0 0 35px rgba(255,215,0,0.25)",
-              }}
-              title="Hive Calendar Site Preview"
-            />
-
-            <Heading variant="heading-default-l" marginBottom="12">
-              Hive Calendar Project
-            </Heading>
-
+            <Heading variant="heading-default-l" marginBottom="12">Hive Calendar Project</Heading>
             <Text onBackground="neutral-medium" marginBottom="20">
-              Architected an automated dashboard using Power BI and Power Automate to display the real-time availability of 5 meeting rooms. Leveraged HTML/CSS/JS and Java/SQL to deploy the status display for straightforward office navigation.
+              Architected an automated dashboard using Power BI and Power Automate to display real-time availability of meeting rooms[cite: 119]. 
+              Leveraged HTML/CSS/JS and Java/SQL to deploy status displays for office navigation[cite: 120].
             </Text>
-            
-            <Button
-              href="https://hivefs-meetingrooms.netlify.app/"
-              target="_blank"
-              variant="secondary"
-              size="s"
-            >
-              View Live Site
-            </Button>
           </Column>
 
-          {/* ===== TIYA Project ===== */}
+          {/* TIYA Project */}
           <Column
             background="neutral-strong"
             padding="l"
@@ -228,38 +168,22 @@ export default function Home() {
             style={{
               width: "80%",
               maxWidth: "850px",
-              boxShadow: "0 0 35px rgba(255,255,255,0.1)",
-              padding: "35px",
-              alignItems: "center",
-              transform: "scale(1.02)",
-              backdropFilter: "blur(10px)",
               border: "1px solid rgba(255,255,255,0.08)",
             }}
           >
             <img
               src="/projects/tiya-preview.png"
-              alt="TIYA Project Preview"
-              style={{
-                width: "80%",
-                borderRadius: "16px",
-                marginBottom: "20px",
-                boxShadow: "0 0 20px rgba(255,255,255,0.2)",
-              }}
+              alt="TIYA Project"
+              style={{ width: "100%", borderRadius: "12px", marginBottom: "20px" }}
             />
-
-            <Heading variant="heading-default-l" marginBottom="12">
-              T.I.Y.A – Tutor In Your Area
-            </Heading>
-
+            <Heading variant="heading-default-l" marginBottom="12">Tutor In Your Area (TIYA)</Heading>
             <Text onBackground="neutral-medium">
-              A web platform built with React and Firebase, integrating Google
-              Maps API and Stripe payments to connect tutors and students
-              locally. It features ZIP-based location search, price filtering,
-              real-time booking, and user authentication.
+              Engineered a platform for students to find tutors based on proximity, translating user needs into clear JS interfaces[cite: 123, 124]. 
+              Built with Java, JavaScript, MySQL, Firebase, and designed in Figma[cite: 125].
             </Text>
           </Column>
 
-          {/* ===== A Taste of Freedom Project ===== */}
+          {/* Taste of Freedom */}
           <Column
             background="neutral-strong"
             padding="l"
@@ -267,38 +191,21 @@ export default function Home() {
             style={{
               width: "80%",
               maxWidth: "850px",
-              boxShadow: "0 0 35px rgba(255,200,150,0.15)",
-              padding: "35px",
-              alignItems: "center",
-              backdropFilter: "blur(10px)",
               border: "1px solid rgba(255,255,255,0.08)",
             }}
           >
             <img
               src="/projects/freedom-preview.png"
-              alt="A Taste of Freedom Flyer"
-              style={{
-                width: "55%",
-                borderRadius: "16px",
-                marginBottom: "20px",
-                objectFit: "contain",
-              }}
+              alt="A Taste of Freedom"
+              style={{ width: "60%", borderRadius: "12px", marginBottom: "20px" }}
             />
-
-            <Heading variant="heading-default-l" marginBottom="12">
-              A Taste of Freedom
-            </Heading>
-
+            <Heading variant="heading-default-l" marginBottom="12">A Taste of Freedom Flyer</Heading>
             <Text onBackground="neutral-medium">
-              A visual identity and flyer design for a community campaign by
-              Flaming Heart Ministries, focusing on accessibility, diversity,
-              and emotional connection using warm, organic colors and legible typography.
+              Designed brochures to drive community participation by improving font legibility and visual hierarchy, ensuring invitations remained accessible to a diverse demographic[cite: 125, 126].
             </Text>
           </Column>
         </Column>
       </Column>
-
-      <Line background="neutral-alpha-weak" marginY="64" />
 
       {/* ===== Contact Section ===== */}
       <Column
@@ -307,34 +214,19 @@ export default function Home() {
         padding="l"
         style={{
           background: "rgba(0,0,0,0.30)",
-          borderTop: "1px solid rgba(255,255,255,0.1)",
+          marginTop: "80px",
           paddingBottom: "80px",
-          color: "white",
           width: "100%",
-          backdropFilter: "blur(10px)",
         }}
         gap="m"
       >
         <Heading variant="display-strong-l">Contact Me</Heading>
+        <Column gap="m" align="center">
+          <Text variant="body-default-l">📧 Slattimore2@student.gsu.edu [cite: 66]</Text>
+          <Text variant="body-default-l">🔗 linkedin.com/in/simonee8420 [cite: 68]</Text>
+          <Text variant="body-default-l">💻 github.com/simonee8420 [cite: 68]</Text>
 
-        <Text onBackground="neutral-medium" style={{ maxWidth: "600px" }}>
-          Interested in collaborating, hiring, or just want to say hi? I&apos;d love to connect.
-        </Text>
-
-        <Column gap="m" align="center" style={{ marginTop: "20px" }}>
-          <a href="mailto:Slattimore2@student.gsu.edu" style={{ color: "white", fontSize: "18px", textDecoration: "none" }}>
-            📧 Slattimore2@student.gsu.edu
-          </a>
-          <a href="https://github.com/simonee8420" target="_blank" rel="noopener noreferrer" style={{ color: "white", fontSize: "18px", textDecoration: "none" }}>
-            💻 github.com/simonee8420
-          </a>
-          <a href="https://www.linkedin.com/in/simonee8420" target="_blank" rel="noopener noreferrer" style={{ color: "white", fontSize: "18px", textDecoration: "none" }}>
-            🔗 linkedin.com/in/simonee8420
-          </a>
-
-          {/* Corrected Resume path based on your folder structure */}
           <a
-            id="resume"
             href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
             target="_blank"
             rel="noopener noreferrer"
@@ -343,12 +235,10 @@ export default function Home() {
               color: "black",
               fontSize: "18px",
               fontWeight: "600",
-              padding: "10px 20px",
+              padding: "12px 24px",
               borderRadius: "30px",
               textDecoration: "none",
-              boxShadow: "0 0 20px rgba(255,255,255,0.4)",
               marginTop: "20px",
-              transition: "all 0.3s ease",
             }}
           >
             📄 View My Résumé
