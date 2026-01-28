@@ -10,7 +10,7 @@ export default function Home() {
       center
       style={{
         minHeight: "100vh",
-        color: "white",
+        color: "white", // Ensures global text is white
         textAlign: "center",
         transition: "opacity 0.6s ease-in-out",
       }}
@@ -37,22 +37,23 @@ export default function Home() {
           marginTop="20"
           className="float"
           style={{
-            textShadow: "0 0 15px rgba(255,255,255,0.15)",
+            color: "#FFFFFF", // Bright white
+            textShadow: "0 0 20px rgba(255,255,255,0.4)", // Increased glow
           }}
         >
           Welcome to my portfolio.
           <br />
-          I'm Simone.
+          I&apos;m Simone.
         </Heading>
 
         <Text
           variant="heading-default-l"
-          onBackground="neutral-weak"
           wrap="balance"
           marginBottom="16"
           className="float-delay"
           style={{
-            textShadow: "0 0 8px rgba(255,255,255,0.15)",
+            color: "#FFFFFF", // Bright white
+            textShadow: "0 0 12px rgba(255,255,255,0.3)",
           }}
         >
           I’m an inspired UI/UX designer and software engineer.
@@ -69,7 +70,6 @@ export default function Home() {
               marginTop: "12px",
               transform: "translateX(-2px)",
               boxShadow: "0 0 15px rgba(255,255,255,0.25)",
-              scrollBehavior: "smooth",
             }}
           >
             Explore my work
@@ -107,6 +107,7 @@ export default function Home() {
             flexWrap: "wrap",
           }}
         >
+          {/* PROFILE PICTURE */}
           <img
             src="/images/og/profile.jpg"
             alt="Simone Lattimore Profile"
@@ -133,7 +134,7 @@ export default function Home() {
             I am a future UI/UX designer and software engineer passionate about
             crafting modern, accessible digital experiences. With experience
             across front-end development, data-driven design, and IT
-            infrastructure, I blend creativity with clean, efficient code. I'm
+            infrastructure, I blend creativity with clean, efficient code. I’m
             also a recent graduate from Georgia State University, where I built
             projects that connected design with real-world problem solving.
             <br />
@@ -173,7 +174,7 @@ export default function Home() {
             gap: "70px",
           }}
         >
-          {/* ===== Hive Financial Systems ===== */}
+          {/* ===== Hive Calendar Project (Updated) ===== */}
           <Column
             background="neutral-strong"
             padding="l"
@@ -189,29 +190,34 @@ export default function Home() {
             }}
           >
             <iframe
-              src="https://hivefs.com"
+              src="https://hivefs-meetingrooms.netlify.app/"
               width="100%"
-              height="300"
+              height="400"
               style={{
                 border: "none",
                 borderRadius: "16px",
                 marginBottom: "20px",
                 boxShadow: "0 0 35px rgba(255,215,0,0.25)",
               }}
-              title="Hive Financial Systems Site Preview"
+              title="Hive Calendar Site Preview"
             />
 
             <Heading variant="heading-default-l" marginBottom="12">
-              Hive Financial System Site
+              Hive Calendar Project
             </Heading>
 
             <Text onBackground="neutral-medium" marginBottom="20">
-              A full-stack financial platform developed with Python, JavaScript,
-              and SQL to optimize internal workflows. The site features secure
-              authentication, structured database design, and a responsive admin
-              dashboard to manage client accounts, payrolls, and transactions
-              efficiently.
+              Architected an automated dashboard using Power BI and Power Automate to display the real-time availability of 5 meeting rooms. Leveraged HTML/CSS/JS and Java/SQL to deploy the status display for straightforward office navigation.
             </Text>
+            
+            <Button
+              href="https://hivefs-meetingrooms.netlify.app/"
+              target="_blank"
+              variant="secondary"
+              size="s"
+            >
+              View Live Site
+            </Button>
           </Column>
 
           {/* ===== TIYA Project ===== */}
@@ -315,37 +321,21 @@ export default function Home() {
         <Heading variant="display-strong-l">Contact Me</Heading>
 
         <Text onBackground="neutral-medium" style={{ maxWidth: "600px" }}>
-          Interested in collaborating, hiring, or just want to say hi? I’d love
-          to connect.
+          Interested in collaborating, hiring, or just want to say hi? I’d love to connect.
         </Text>
 
         <Column gap="m" align="center" style={{ marginTop: "20px" }}>
-          <a
-            href="mailto:simonee8420@gmail.com"
-            style={{ color: "white", fontSize: "18px", textDecoration: "none" }}
-          >
+          <a href="mailto:simonee8420@gmail.com" style={{ color: "white", fontSize: "18px", textDecoration: "none" }}>
             📧 simonee8420@gmail.com
           </a>
-
-          <a
-            href="https://github.com/simonee8420"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "white", fontSize: "18px", textDecoration: "none" }}
-          >
+          <a href="https://github.com/simonee8420" target="_blank" rel="noopener noreferrer" style={{ color: "white", fontSize: "18px", textDecoration: "none" }}>
             💻 github.com/simonee8420
           </a>
-
-          <a
-            href="https://www.linkedin.com/in/simonee8420"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "white", fontSize: "18px", textDecoration: "none" }}
-          >
+          <a href="https://www.linkedin.com/in/simonee8420" target="_blank" rel="noopener noreferrer" style={{ color: "white", fontSize: "18px", textDecoration: "none" }}>
             🔗 linkedin.com/in/simonee8420
           </a>
 
-          {/* ✅ Resume link (must match /public file name EXACTLY) */}
+          {/* Resume link */}
           <a
             id="resume"
             href="/SIMONE_LATTIMORE_RESUME.pdf"
@@ -362,14 +352,6 @@ export default function Home() {
               boxShadow: "0 0 20px rgba(255,255,255,0.4)",
               marginTop: "20px",
               transition: "all 0.3s ease",
-            }}
-            onMouseOver={(e) => {
-              const target = e.currentTarget as HTMLAnchorElement;
-              target.style.boxShadow = "0 0 25px rgba(255,255,255,0.8)";
-            }}
-            onMouseOut={(e) => {
-              const target = e.currentTarget as HTMLAnchorElement;
-              target.style.boxShadow = "0 0 20px rgba(255,255,255,0.4)";
             }}
           >
             📄 View My Résumé
