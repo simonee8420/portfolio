@@ -121,10 +121,10 @@ export default function Home() {
               textAlign: "left",
             }}
           >
-            I&apos;m a <b>Georgia State University</b> Computer Science graduate dedicated to understanding the psychological principles behind digital interaction[cite: 70, 73]. 
-            I apply programming and behavioral research to design accessible tools that align with human cognition by studying how users process information in digital environments[cite: 71].
+            I&apos;m a <b>Georgia State University</b> Computer Science graduate dedicated to understanding the psychological principles behind digital interaction. 
+            I apply programming and behavioral research to design accessible tools that align with human cognition by studying how users process information in digital environments.
             <br /><br />
-            With a GPA of <b>3.47/4.00</b> and experience ranging from IT infrastructure to graphic design, I focus on building software that solves real-world problems with a human-centered approach[cite: 75, 87, 113].
+            With a GPA of <b>3.47/4.00</b> and experience ranging from IT infrastructure to graphic design, I focus on building software that solves real-world problems with a human-centered approach.
           </Text>
         </Column>
       </Column>
@@ -140,7 +140,8 @@ export default function Home() {
       >
         <Heading variant="display-strong-l" marginBottom="48">Featured Projects</Heading>
 
-        <Column gap="70" align="center">
+        {/* Fixed: gap set to "xl" instead of "70" */}
+        <Column gap="xl" align="center">
           {/* Hive Calendar Project */}
           <Column
             background="neutral-strong"
@@ -155,8 +156,8 @@ export default function Home() {
           >
             <Heading variant="heading-default-l" marginBottom="12">Hive Calendar Project</Heading>
             <Text onBackground="neutral-medium" marginBottom="20">
-              Architected an automated dashboard using Power BI and Power Automate to display real-time availability of meeting rooms[cite: 119]. 
-              Leveraged HTML/CSS/JS and Java/SQL to deploy status displays for office navigation[cite: 120].
+              Architected an automated dashboard using Power BI and Power Automate to display real-time availability of meeting rooms. 
+              Leveraged HTML/CSS/JS and Java/SQL to deploy status displays for office navigation.
             </Text>
           </Column>
 
@@ -178,8 +179,8 @@ export default function Home() {
             />
             <Heading variant="heading-default-l" marginBottom="12">Tutor In Your Area (TIYA)</Heading>
             <Text onBackground="neutral-medium">
-              Engineered a platform for students to find tutors based on proximity, translating user needs into clear JS interfaces[cite: 123, 124]. 
-              Built with Java, JavaScript, MySQL, Firebase, and designed in Figma[cite: 125].
+              Engineered a platform for students to find tutors based on proximity, translating user needs into clear JS interfaces. 
+              Built with Java, JavaScript, MySQL, Firebase, and designed in Figma.
             </Text>
           </Column>
 
@@ -201,7 +202,7 @@ export default function Home() {
             />
             <Heading variant="heading-default-l" marginBottom="12">A Taste of Freedom Flyer</Heading>
             <Text onBackground="neutral-medium">
-              Designed brochures to drive community participation by improving font legibility and visual hierarchy, ensuring invitations remained accessible to a diverse demographic[cite: 125, 126].
+              Designed brochures to drive community participation by improving font legibility and visual hierarchy, ensuring invitations remained accessible to a diverse demographic.
             </Text>
           </Column>
         </Column>
@@ -222,9 +223,9 @@ export default function Home() {
       >
         <Heading variant="display-strong-l">Contact Me</Heading>
         <Column gap="m" align="center">
-          <Text variant="body-default-l">📧 Slattimore2@student.gsu.edu [cite: 66]</Text>
-          <Text variant="body-default-l">🔗 linkedin.com/in/simonee8420 [cite: 68]</Text>
-          <Text variant="body-default-l">💻 github.com/simonee8420 [cite: 68]</Text>
+          <Text variant="body-default-l">📧 Slattimore2@student.gsu.edu</Text>
+          <Text variant="body-default-l">🔗 linkedin.com/in/simonee8420</Text>
+          <Text variant="body-default-l">💻 github.com/simonee8420</Text>
 
           <a
             href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
