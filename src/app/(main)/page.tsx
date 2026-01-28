@@ -10,7 +10,7 @@ export default function Home() {
       center
       style={{
         minHeight: "100vh",
-        color: "white", // Ensures global text is white
+        color: "white", 
         textAlign: "center",
         transition: "opacity 0.6s ease-in-out",
       }}
@@ -37,8 +37,8 @@ export default function Home() {
           marginTop="20"
           className="float"
           style={{
-            color: "#FFFFFF", // Bright white
-            textShadow: "0 0 20px rgba(255,255,255,0.4)", // Increased glow
+            color: "#FFFFFF", // Brightest white
+            textShadow: "0 0 20px rgba(255,255,255,0.4)",
           }}
         >
           Welcome to my portfolio.
@@ -52,11 +52,11 @@ export default function Home() {
           marginBottom="16"
           className="float-delay"
           style={{
-            color: "#FFFFFF", // Bright white
+            color: "#FFFFFF",
             textShadow: "0 0 12px rgba(255,255,255,0.3)",
           }}
         >
-          I’m an inspired UI/UX designer and software engineer.
+          I&apos;m an inspired UI/UX researcher and software engineer.
         </Text>
 
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -130,16 +130,16 @@ export default function Home() {
               marginLeft: "30px",
             }}
           >
-            Hi 👋 I’m <b>Simone Lattimore</b>. <br />
-            I am a future UI/UX designer and software engineer passionate about
+            Hi 👋 I&apos;m <b>Simone Lattimore</b>. <br />
+            I am a future UI/UX researcher and software engineer passionate about
             crafting modern, accessible digital experiences. With experience
             across front-end development, data-driven design, and IT
-            infrastructure, I blend creativity with clean, efficient code. I’m
+            infrastructure, I blend creativity with clean, efficient code. I&apos;m
             also a recent graduate from Georgia State University, where I built
             projects that connected design with real-world problem solving.
             <br />
             <br />
-            When I’m not coding or designing, I love exploring new tech trends,
+            When I&apos;m not coding or designing, I love exploring new tech trends,
             mentoring peers, and refining my personal design systems.
           </Text>
         </Column>
@@ -174,7 +174,7 @@ export default function Home() {
             gap: "70px",
           }}
         >
-          {/* ===== Hive Calendar Project (Updated) ===== */}
+          {/* ===== Hive Calendar Project ===== */}
           <Column
             background="neutral-strong"
             padding="l"
@@ -255,8 +255,7 @@ export default function Home() {
               A web platform built with React and Firebase, integrating Google
               Maps API and Stripe payments to connect tutors and students
               locally. It features ZIP-based location search, price filtering,
-              real-time booking, and user authentication — blending functional
-              design with clean, intuitive interfaces.
+              real-time booking, and user authentication.
             </Text>
           </Column>
 
@@ -293,9 +292,7 @@ export default function Home() {
             <Text onBackground="neutral-medium">
               A visual identity and flyer design for a community campaign by
               Flaming Heart Ministries, focusing on accessibility, diversity,
-              and emotional connection. The design combines warm, organic colors
-              and legible typography to reflect unity and inclusivity in a
-              modern, approachable layout.
+              and emotional connection using warm, organic colors and legible typography.
             </Text>
           </Column>
         </Column>
@@ -321,12 +318,12 @@ export default function Home() {
         <Heading variant="display-strong-l">Contact Me</Heading>
 
         <Text onBackground="neutral-medium" style={{ maxWidth: "600px" }}>
-          Interested in collaborating, hiring, or just want to say hi? I’d love to connect.
+          Interested in collaborating, hiring, or just want to say hi? I&apos;d love to connect.
         </Text>
 
         <Column gap="m" align="center" style={{ marginTop: "20px" }}>
-          <a href="mailto:simonee8420@gmail.com" style={{ color: "white", fontSize: "18px", textDecoration: "none" }}>
-            📧 simonee8420@gmail.com
+          <a href="mailto:Slattimore2@student.gsu.edu" style={{ color: "white", fontSize: "18px", textDecoration: "none" }}>
+            📧 Slattimore2@student.gsu.edu
           </a>
           <a href="https://github.com/simonee8420" target="_blank" rel="noopener noreferrer" style={{ color: "white", fontSize: "18px", textDecoration: "none" }}>
             💻 github.com/simonee8420
@@ -335,10 +332,10 @@ export default function Home() {
             🔗 linkedin.com/in/simonee8420
           </a>
 
-          {/* Resume link */}
+          {/* Corrected Resume path based on your folder structure */}
           <a
             id="resume"
-            href="/SIMONE_LATTIMORE_RESUME.pdf"
+            href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
             target="_blank"
             rel="noopener noreferrer"
             style={{
