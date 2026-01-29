@@ -105,7 +105,6 @@ function ProjectCard({ project }: { project: Project }) {
 
   return (
     <GlassCard padding="26px">
-      {/* Preview ABOVE description */}
       <div
         style={{
           width: "100%",
@@ -138,7 +137,13 @@ function ProjectCard({ project }: { project: Project }) {
               }}
             />
           ) : (
-            <div style={{ position: "relative", width: "100%", height: `${previewHeight}px` }}>
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                height: `${previewHeight}px`,
+              }}
+            >
               <Image
                 src={project.src}
                 alt={project.alt}
@@ -197,7 +202,6 @@ export default function Home() {
         paddingBottom: 100,
       }}
     >
-      {/* Local CSS for animation + small polish */}
       <style>{`
         @keyframes floatSlow {
           0% { transform: translateY(0px); }
@@ -222,19 +226,27 @@ export default function Home() {
           background: rgba(0,0,0,0.04);
           color: rgba(15,15,15,0.88);
         }
+
+        /* UPDATED BUTTON COLORS */
         .pillBtn {
-          background: rgba(15,15,15,0.92);
-          color: white;
+          background: rgba(20,20,20,0.92);
+          color: rgba(255,255,255,0.96);
           padding: 12px 18px;
           border-radius: 999px;
-          font-weight: 900;
+          font-weight: 950;
           text-decoration: none;
           box-shadow: 0 16px 40px rgba(0,0,0,0.12);
           display: inline-flex;
           align-items: center;
           gap: 8px;
+          transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
         }
-        .pillBtn:hover { transform: translateY(-1px); }
+        .pillBtn:hover { 
+          transform: translateY(-1px);
+          background: rgba(15,15,15,0.96);
+          box-shadow: 0 20px 46px rgba(0,0,0,0.14);
+        }
+
         .softBtn {
           background: rgba(255,255,255,0.78);
           color: rgba(15,15,15,0.92);
@@ -246,8 +258,12 @@ export default function Home() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
+          transition: transform 160ms ease, background 160ms ease;
         }
-        .softBtn:hover { background: rgba(255,255,255,0.92); }
+        .softBtn:hover { 
+          background: rgba(255,255,255,0.92);
+          transform: translateY(-1px);
+        }
       `}</style>
 
       {/* Sticky Header */}
@@ -271,6 +287,7 @@ export default function Home() {
               gap: 12,
             }}
           >
+            {/* LEFT: remove Simone/UI and UX text */}
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div
                 style={{
@@ -284,14 +301,10 @@ export default function Home() {
                   fontWeight: 950,
                   letterSpacing: "-0.02em",
                 }}
+                aria-label="Logo"
+                title="Simone"
               >
                 S
-              </div>
-              <div style={{ lineHeight: 1.1 }}>
-                <div style={{ fontWeight: 950, letterSpacing: "-0.03em" }}>Simone</div>
-                <div style={{ fontSize: 12, color: "rgba(0,0,0,0.55)", fontWeight: 700 }}>
-                  UI and UX
-                </div>
               </div>
             </div>
 
@@ -305,7 +318,14 @@ export default function Home() {
               <a className="navLink" href="#contact">
                 Contact
               </a>
-              <a className="softBtn" href="/images/og/SIMONE_LATTIMORE_RESUME.pdf" target="_blank" rel="noopener noreferrer">
+
+              {/* Resume button now matches soft theme */}
+              <a
+                className="softBtn"
+                href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Résumé
               </a>
             </div>
@@ -330,10 +350,23 @@ export default function Home() {
                 color: "rgba(0,0,0,0.70)",
               }}
             >
-              <span style={{ fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              <span
+                style={{
+                  fontSize: 12,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                }}
+              >
                 Portfolio
               </span>
-              <span style={{ width: 4, height: 4, borderRadius: 99, background: "rgba(0,0,0,0.30)" }} />
+              <span
+                style={{
+                  width: 4,
+                  height: 4,
+                  borderRadius: 99,
+                  background: "rgba(0,0,0,0.30)",
+                }}
+              />
               <span style={{ fontSize: 12 }}>UI and UX Design</span>
             </div>
 
@@ -363,11 +396,20 @@ export default function Home() {
                 fontWeight: 700,
               }}
             >
-              I build human-centered interfaces with engineering discipline and design taste.
-              Explore my work below, from polished UI screens to fully working web experiences.
+              I build human-centered interfaces with engineering discipline and
+              design taste. Explore my work below, from polished UI screens to
+              fully working web experiences.
             </p>
 
-            <div style={{ marginTop: 22, display: "flex", gap: 12, flexWrap: "wrap" }}>
+            <div
+              style={{
+                marginTop: 22,
+                display: "flex",
+                gap: 12,
+                flexWrap: "wrap",
+              }}
+            >
+              {/* View featured work button now white text (no blue) */}
               <a className="pillBtn" href="#projects">
                 View featured work <span aria-hidden>↓</span>
               </a>
@@ -437,7 +479,10 @@ export default function Home() {
                     fontWeight: 650,
                   }}
                 >
-                  I&apos;m Simone Lattimore, a Computer Science graduate focused on UI and UX design. I care about the moments where users pause, second-guess, or abandon a task, and I like turning those moments into clear, calm interactions.
+                  I&apos;m Simone Lattimore, a Computer Science graduate focused
+                  on UI and UX design. I care about the moments where users
+                  pause, second-guess, or abandon a task, and I like turning
+                  those moments into clear, calm interactions.
                 </p>
 
                 <p
@@ -450,7 +495,11 @@ export default function Home() {
                     fontWeight: 650,
                   }}
                 >
-                  My goal is to create products that are accessible, efficient, and intuitive for everyone. I enjoy connecting behavioral thinking with implementation, so designs are not just visually strong, they also hold up under real constraints and real user needs.
+                  My goal is to create products that are accessible, efficient,
+                  and intuitive for everyone. I enjoy connecting behavioral
+                  thinking with implementation, so designs are not just visually
+                  strong, they also hold up under real constraints and real user
+                  needs.
                 </p>
 
                 <p
@@ -463,7 +512,10 @@ export default function Home() {
                     fontWeight: 650,
                   }}
                 >
-                  I&apos;m especially interested in how people navigate everyday experiences like search, scheduling, onboarding, and accessibility, and how small interface decisions can make those experiences feel clearer and easier to complete.
+                  I&apos;m especially interested in how people navigate everyday
+                  experiences like search, scheduling, onboarding, and
+                  accessibility, and how small interface decisions can make
+                  those experiences feel clearer and easier to complete.
                 </p>
               </div>
             </div>
@@ -510,20 +562,69 @@ export default function Home() {
               Contact
             </h2>
 
-            <div style={{ display: "grid", gap: 10, justifyContent: "center", textAlign: "center" }}>
-              <p style={{ margin: 0, fontSize: 18, color: "rgba(20,20,20,0.72)", fontWeight: 750 }}>
+            <div
+              style={{
+                display: "grid",
+                gap: 10,
+                justifyContent: "center",
+                textAlign: "center",
+              }}
+            >
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 18,
+                  color: "rgba(20,20,20,0.72)",
+                  fontWeight: 750,
+                }}
+              >
                 📧 Slattimore2@student.gsu.edu
               </p>
 
-              <p style={{ margin: 0, fontSize: 18, color: "rgba(20,20,20,0.72)", fontWeight: 750 }}>
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 18,
+                  color: "rgba(20,20,20,0.72)",
+                  fontWeight: 750,
+                }}
+              >
                 🔗{" "}
                 <Link
                   href="https://linkedin.com/in/simonee8420"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: "rgba(20,20,20,0.86)", textDecoration: "underline", fontWeight: 900 }}
+                  style={{
+                    color: "rgba(20,20,20,0.86)",
+                    textDecoration: "underline",
+                    fontWeight: 900,
+                  }}
                 >
                   linkedin.com/in/simonee8420
+                </Link>
+              </p>
+
+              {/* NEW: GitHub link */}
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 18,
+                  color: "rgba(20,20,20,0.72)",
+                  fontWeight: 750,
+                }}
+              >
+                💻{" "}
+                <Link
+                  href="https://github.com/simonee8420"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: "rgba(20,20,20,0.86)",
+                    textDecoration: "underline",
+                    fontWeight: 900,
+                  }}
+                >
+                  github.com/simonee8420
                 </Link>
               </p>
 
