@@ -1,8 +1,157 @@
-// app/(main)/page.tsx
+// src/app/(main)/page.tsx
+
 import Image from "next/image";
 import Link from "next/link";
 
-export const runtime = "nodejs";
+type Project =
+  | {
+      id: string;
+      title: string;
+      description: string;
+      type: "iframe";
+      src: string;
+    }
+  | {
+      id: string;
+      title: string;
+      description: string;
+      type: "image";
+      src: string;
+      alt: string;
+    };
+
+const projects: Project[] = [
+  {
+    id: "hive-meeting-rooms",
+    title: "Hive Financial System Site",
+    description:
+      "A full-stack financial platform developed with Python, JavaScript, and SQL to optimize internal workflows. The site features secure authentication, structured database design, and a responsive admin dashboard to manage client accounts, payrolls, and transactions efficiently.",
+    type: "iframe",
+    src: "https://hivefs-meetingrooms.netlify.app/",
+  },
+  {
+    id: "tiya",
+    title: "T.I.Y.A – Tutor In Your Area",
+    description:
+      "A web platform built with React and Firebase, integrating Google Maps API and Stripe payments to connect tutors and students locally. It features ZIP-based location search, price filtering, real-time booking, and user authentication — blending functional design with clean, intuitive interfaces.",
+    type: "image",
+    src: "/projects/tiya-preview.png",
+    alt: "TIYA preview",
+  },
+  {
+    id: "taste-of-freedom",
+    title: "A Taste of Freedom",
+    description:
+      "A visual identity and flyer design for a community campaign by Flaming Heart Ministries, focusing on accessibility, diversity, and emotional connection. The design combines warm, organic colors and legible typography to reflect unity and inclusivity in a modern, approachable layout.",
+    type: "image",
+    src: "/projects/freedom-preview.png",
+    alt: "A Taste of Freedom preview",
+  },
+];
+
+function ProjectCard({ project }: { project: Project }) {
+  return (
+    <section
+      style={{
+        width: "min(1100px, 92%)",
+        margin: "0 auto",
+        background: "rgba(255,255,255,0.08)",
+        border: "1px solid rgba(255,255,255,0.10)",
+        borderRadius: "28px",
+        boxShadow: "0 18px 70px rgba(0,0,0,0.45)",
+        padding: "28px",
+      }}
+    >
+      {/* Preview ON TOP */}
+      <div
+        style={{
+          width: "100%",
+          background: "rgba(255,255,255,0.80)",
+          borderRadius: "22px",
+          padding: "18px",
+          boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.08)",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            borderRadius: "16px",
+            overflow: "hidden",
+            background: "#fff",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
+          }}
+        >
+          {project.type === "iframe" ? (
+            <iframe
+              src={project.src}
+              title={project.title}
+              style={{
+                width: "100%",
+                height: "360px",
+                border: "0",
+                display: "block",
+                background: "#fff",
+              }}
+              // helps embedded sites behave better in many cases
+              loading="lazy"
+            />
+          ) : (
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                height: "360px",
+                background: "#fff",
+              }}
+            >
+              <Image
+                src={project.src}
+                alt={project.alt}
+                fill
+                sizes="(max-width: 900px) 92vw, 1100px"
+                style={{
+                  objectFit: "contain",
+                  background: "white",
+                }}
+                priority={project.id === "hive-meeting-rooms"}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Title + Description BELOW preview */}
+      <h3
+        style={{
+          marginTop: "22px",
+          marginBottom: "10px",
+          fontSize: "28px",
+          fontWeight: 800,
+          color: "rgba(255,255,255,0.92)",
+          letterSpacing: "-0.02em",
+          textAlign: "center",
+        }}
+      >
+        {project.title}
+      </h3>
+
+      <p
+        style={{
+          margin: 0,
+          color: "rgba(255,255,255,0.70)",
+          lineHeight: 1.7,
+          fontSize: "16px",
+          maxWidth: "900px",
+          marginLeft: "auto",
+          marginRight: "auto",
+          textAlign: "center",
+        }}
+      >
+        {project.description}
+      </p>
+    </section>
+  );
+}
 
 export default function Home() {
   return (
@@ -10,242 +159,56 @@ export default function Home() {
       style={{
         minHeight: "100vh",
         color: "white",
-        textAlign: "center",
-        paddingBottom: "80px",
         background:
-          "radial-gradient(1200px 800px at 50% 0%, rgba(255,255,255,0.08), rgba(0,0,0,0.85))",
+          "radial-gradient(1200px 800px at 50% 0%, rgba(255,255,255,0.08), rgba(0,0,0,0.90))",
+        paddingBottom: "90px",
       }}
     >
-      {/* Hero */}
-      <section
-        style={{
-          margin: "40px auto 0",
-          borderRadius: "28px",
-          backdropFilter: "blur(10px)",
-          background: "rgba(0,0,0,0.22)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          boxShadow: "0 0 60px rgba(0,0,0,0.35)",
-          maxWidth: "980px",
-          width: "92%",
-          padding: "28px 22px",
-        }}
-      >
-        <h1
+      {/* ===== Featured Projects ===== */}
+      <section style={{ paddingTop: "70px" }}>
+        <h2
           style={{
-            textShadow: "0 0 20px rgba(255,255,255,0.4)",
+            textAlign: "center",
             fontSize: "clamp(34px, 4vw, 54px)",
-            lineHeight: 1.1,
-            margin: "8px 0 12px",
-            fontWeight: 800,
-            letterSpacing: "-0.02em",
-          }}
-        >
-          Welcome to my portfolio.
-          <br />
-          I&apos;m Simone A. Lattimore.
-        </h1>
-
-        <p
-          style={{
-            textShadow: "0 0 12px rgba(255,255,255,0.3)",
-            fontSize: "clamp(16px, 1.6vw, 20px)",
-            margin: "0 auto 18px",
-            maxWidth: 780,
-            lineHeight: 1.6,
-            color: "rgba(255,255,255,0.92)",
-          }}
-        >
-          Computer Science graduate & incoming UI/UX researcher and designer.
-        </p>
-
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <a
-            href="#projects"
-            style={{
-              marginTop: 12,
-              boxShadow: "0 0 15px rgba(255,255,255,0.25)",
-              background: "rgba(255,255,255,0.95)",
-              color: "black",
-              padding: "12px 20px",
-              borderRadius: 999,
-              textDecoration: "none",
-              fontWeight: 700,
-              display: "inline-block",
-            }}
-          >
-            Explore my work
-          </a>
-        </div>
-      </section>
-
-      {/* About */}
-      <section
-        id="about"
-        style={{
-          background: "rgba(0,0,0,0.35)",
-          borderRadius: 24,
-          margin: "80px auto 60px",
-          maxWidth: 950,
-          width: "92%",
-          border: "1px solid rgba(255,255,255,0.08)",
-          boxShadow: "0 0 50px rgba(255,255,255,0.05)",
-          backdropFilter: "blur(10px)",
-          padding: "28px 22px",
-        }}
-      >
-        <h2
-          style={{
-            fontSize: "clamp(26px, 2.5vw, 34px)",
-            margin: "8px 0 22px",
-            fontWeight: 800,
-            letterSpacing: "-0.02em",
-          }}
-        >
-          About Me
-        </h2>
-
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 20,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              width: 200,
-              height: 200,
-              borderRadius: "50%",
-              overflow: "hidden",
-              boxShadow: "0 0 25px rgba(255,255,255,0.25)",
-              flex: "0 0 auto",
-            }}
-          >
-            <Image
-              src="/images/og/profile.jpg"
-              alt="Simone Lattimore"
-              width={200}
-              height={200}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              priority
-            />
-          </div>
-
-          <p
-            style={{
-              maxWidth: 550,
-              lineHeight: 1.8,
-              textAlign: "left",
-              margin: 0,
-              fontSize: 16,
-              color: "rgba(255,255,255,0.92)",
-            }}
-          >
-            I&apos;m a <b>Georgia State University</b> Computer Science graduate
-            dedicated to understanding the psychological principles behind digital
-            interaction. I apply programming and behavioral research to design
-            accessible tools that align with human cognition.
-            <br />
-            <br />
-            With a GPA of <b>3.47/4.00</b> and experience ranging from IT
-            infrastructure to graphic design, I focus on building software that
-            solves real-world problems with a human-centered approach.
-          </p>
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div
-        style={{
-          height: 1,
-          width: "100%",
-          background: "rgba(255,255,255,0.1)",
-          margin: "64px 0",
-        }}
-      />
-
-      {/* Projects */}
-      <section id="projects" style={{ width: "100%", scrollMarginTop: 80 }}>
-        <h2
-          style={{
-            fontSize: "clamp(26px, 2.5vw, 34px)",
-            margin: "0 0 48px",
-            fontWeight: 800,
-            letterSpacing: "-0.02em",
+            fontWeight: 900,
+            letterSpacing: "-0.03em",
+            margin: "0 0 36px",
+            textShadow: "0 0 22px rgba(255,255,255,0.18)",
           }}
         >
           Featured Projects
         </h2>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 22, alignItems: "center" }}>
-          <article
-            style={{
-              width: "80%",
-              maxWidth: 850,
-              borderRadius: 20,
-              padding: 22,
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              boxShadow: "0 0 40px rgba(255,215,0,0.15)",
-              textAlign: "left",
-            }}
-          >
-            <h3 style={{ margin: "0 0 10px", fontSize: 20, fontWeight: 800 }}>
-              Hive Calendar Project
-            </h3>
-            <p style={{ margin: 0, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
-              Architected an automated dashboard using Power BI and Power Automate
-              to display real-time availability of meeting rooms.
-            </p>
-          </article>
-
-          <article
-            style={{
-              width: "80%",
-              maxWidth: 850,
-              borderRadius: 20,
-              padding: 22,
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              textAlign: "left",
-            }}
-          >
-            <h3 style={{ margin: "0 0 10px", fontSize: 20, fontWeight: 800 }}>
-              Tutor In Your Area (TIYA)
-            </h3>
-            <p style={{ margin: 0, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
-              Engineered a platform for students to find tutors based on proximity.
-              Built with Java, JavaScript, MySQL, Firebase, and designed in Figma.
-            </p>
-          </article>
+        <div style={{ display: "grid", gap: "36px" }}>
+          {projects.map((p) => (
+            <ProjectCard key={p.id} project={p} />
+          ))}
         </div>
       </section>
 
-      {/* Contact */}
+      {/* ===== Contact ===== */}
       <section
         id="contact"
         style={{
-          background: "rgba(0,0,0,0.30)",
-          marginTop: 80,
-          width: "100%",
-          padding: "38px 18px 80px",
+          marginTop: "80px",
+          padding: "40px 18px 0",
+          textAlign: "center",
         }}
       >
         <h2
           style={{
-            fontSize: "clamp(26px, 2.5vw, 34px)",
-            margin: "0 0 18px",
-            fontWeight: 800,
+            fontSize: "clamp(28px, 3vw, 40px)",
+            fontWeight: 900,
+            marginBottom: "16px",
             letterSpacing: "-0.02em",
           }}
         >
           Contact Me
         </h2>
 
-        <div style={{ display: "grid", gap: 10, justifyContent: "center" }}>
+        <div style={{ display: "grid", gap: "10px", justifyContent: "center" }}>
           <p style={{ margin: 0, fontSize: 18 }}>📧 Slattimore2@student.gsu.edu</p>
+
           <p style={{ margin: 0, fontSize: 18 }}>
             🔗{" "}
             <Link
@@ -266,11 +229,11 @@ export default function Home() {
               backgroundColor: "white",
               color: "black",
               fontSize: 18,
-              fontWeight: 700,
+              fontWeight: 800,
               padding: "12px 24px",
               borderRadius: 999,
               textDecoration: "none",
-              marginTop: 18,
+              marginTop: 14,
               display: "inline-block",
             }}
           >
