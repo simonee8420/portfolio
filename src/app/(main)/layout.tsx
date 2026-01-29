@@ -1,31 +1,34 @@
-import '@once-ui-system/core/css/styles.css';
-import '@once-ui-system/core/css/tokens.css';
-import '@/resources/custom.css'
+// app/layout.tsx
+"use client";
 
+import "@once-ui-system/core/css/styles.css";
+import "@once-ui-system/core/css/tokens.css";
+import "@/resources/custom.css";
+
+import React, { useMemo } from "react";
 import classNames from "classnames";
 
 import { baseURL, meta, fonts, effects, style, dataStyle } from "@/resources/once-ui.config";
-import { Meta, Schema, Column, Flex, opacity, SpacingToken, Background } from "@once-ui-system/core";
-import { Providers } from '@/components/Providers';
-
-export async function generateMetadata() {
-  return Meta.generate({
-    title: meta.home.title,
-    description: meta.home.description,
-    baseURL: baseURL,
-    path: meta.home.path,
-    canonical: meta.home.canonical,
-    image: meta.home.image,
-    robots: meta.home.robots,
-    alternates: meta.home.alternates,
-  });
-}
+import { Column, Flex, Background, opacity, SpacingToken } from "@once-ui-system/core";
+import { Providers } from "@/components/Providers";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // JSON-LD schema data (client-safe)
+  const jsonLd = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: meta?.home?.title ?? "Portfolio",
+      description: meta?.home?.description ?? "Portfolio",
+      url: baseURL ? `${baseURL}${meta?.home?.path ?? "/"}` : meta?.home?.path ?? "/",
+    }),
+    []
+  );
+
   return (
     <Flex
       suppressHydrationWarning
@@ -33,20 +36,14 @@ export default function RootLayout({
       lang="en"
       fillWidth
       className={classNames(
-        fonts.heading.variable,
-        fonts.body.variable,
-        fonts.label.variable,
-        fonts.code.variable,
+        fonts?.heading?.variable,
+        fonts?.body?.variable,
+        fonts?.label?.variable,
+        fonts?.code?.variable
       )}
     >
-      <Schema
-        as="webPage"
-        baseURL={baseURL}
-        title={meta.home.title}
-        description={meta.home.description}
-        path={meta.home.path}
-      />
       <head>
+        {/* Theme init */}
         <script
           id="theme-init"
           dangerouslySetInnerHTML={{
@@ -61,16 +58,16 @@ export default function RootLayout({
                     accent: style.accent,
                     neutral: style.neutral,
                     solid: style.solid,
-                    'solid-style': style.solidStyle,
+                    "solid-style": style.solidStyle,
                     border: style.border,
                     surface: style.surface,
                     transition: style.transition,
                     scaling: style.scaling,
-                    'viz-style': dataStyle.variant,
+                    "viz-style": dataStyle.variant,
                   })};
 
                   Object.entries(config).forEach(([key, value]) => {
-                    root.setAttribute('data-' + key, value);
+                    if (value) root.setAttribute('data-' + key, value);
                   });
 
                   const resolveTheme = (themeValue) => {
@@ -92,9 +89,7 @@ export default function RootLayout({
                   const styleKeys = Object.keys(config);
                   styleKeys.forEach(key => {
                     const value = localStorage.getItem('data-' + key);
-                    if (value) {
-                      root.setAttribute('data-' + key, value);
-                    }
+                    if (value) root.setAttribute('data-' + key, value);
                   });
                 } catch (e) {
                   console.error('Failed to initialize theme:', e);
@@ -103,6 +98,12 @@ export default function RootLayout({
               })();
             `,
           }}
+        />
+
+        {/* JSON-LD schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
 
@@ -113,10 +114,10 @@ export default function RootLayout({
           margin="0"
           padding="0"
           className="apple-globe-bg"
-          style={{ position: "relative" }}
+          style={{ position: "relative", minHeight: "100vh" }}
           suppressHydrationWarning
         >
-          {/* Once UI background effects (kept, but layered behind) */}
+          {/* Once UI background effects */}
           <Background
             position="absolute"
             mask={{
@@ -164,10 +165,8 @@ export default function RootLayout({
             }}
           />
 
-          {/* Content above the background */}
-          <div style={{ position: "relative", zIndex: 1 }}>
-            {children}
-          </div>
+          {/* Content above background */}
+          <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
         </Column>
       </Providers>
     </Flex>
