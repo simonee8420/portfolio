@@ -185,19 +185,7 @@ function ProjectCard({ project }: { project: Project }) {
         {project.description}
       </p>
 
-      {/* Optional link to case studies page */}
-      <div style={{ marginTop: 16, textAlign: "center" }}>
-        <Link
-          href={`/case-studies/${project.id}`}
-          style={{
-            fontWeight: 900,
-            textDecoration: "none",
-            color: "rgba(20,20,20,0.78)",
-          }}
-        >
-          View case study →
-        </Link>
-      </div>
+      {/* ✅ Removed per-project case study link */}
     </GlassCard>
   );
 }
@@ -240,24 +228,27 @@ export default function Home() {
           background: rgba(0,0,0,0.04);
           color: rgba(15,15,15,0.88);
         }
+
+        /* ✅ pillBtn is back to the previous gradient color */
         .pillBtn {
-          background: rgba(20,20,20,0.92);
-          color: rgba(255,255,255,0.96);
+          background: linear-gradient(135deg, #7b6cff, #ff6aa2, #ff9f4d);
+          color: rgba(255,255,255,0.98);
           padding: 12px 18px;
           border-radius: 999px;
           font-weight: 950;
           text-decoration: none;
-          box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+          box-shadow: 0 16px 40px rgba(0,0,0,0.14);
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+          transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
         }
         .pillBtn:hover { 
           transform: translateY(-1px);
-          background: rgba(15,15,15,0.96);
-          box-shadow: 0 20px 46px rgba(0,0,0,0.14);
+          box-shadow: 0 20px 46px rgba(0,0,0,0.16);
+          filter: brightness(1.02);
         }
+
         .softBtn {
           background: rgba(255,255,255,0.78);
           color: rgba(15,15,15,0.92);
@@ -392,7 +383,7 @@ export default function Home() {
                 View featured work <span aria-hidden>↓</span>
               </a>
 
-              {/* ✅ Replaces "Read case studies" and goes to About. Colors unchanged. */}
+              {/* Goes to About. Colors unchanged. */}
               <a className="softBtn" href="#about">
                 Learn more about me <span aria-hidden>↓</span>
               </a>
@@ -491,9 +482,9 @@ export default function Home() {
                   }}
                 >
                   I&apos;m especially interested in everyday experiences like
-                  search, scheduling, onboarding, and accessibility, and how small
-                  interface decisions can make tasks feel clearer from start to
-                  finish.
+                  search, scheduling, onboarding, and accessibility, and how
+                  small interface decisions can make tasks feel clearer from
+                  start to finish.
                 </p>
               </div>
             </div>
@@ -520,6 +511,13 @@ export default function Home() {
             {projects.map((p) => (
               <ProjectCard key={p.id} project={p} />
             ))}
+          </div>
+
+          {/* ✅ Single button under Featured Work and above Contact */}
+          <div style={{ marginTop: 28, textAlign: "center" }}>
+            <Link href="/case-studies" className="pillBtn">
+              View Case Studies <span aria-hidden>→</span>
+            </Link>
           </div>
         </div>
       </SectionShell>
