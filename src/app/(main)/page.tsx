@@ -1,4 +1,5 @@
 // src/app/(main)/page.tsx
+
 "use client";
 
 import Image from "next/image";
@@ -27,7 +28,7 @@ const projects: Project[] = [
     id: "hive",
     title: "Hive Meeting Rooms Display",
     description:
-      "A TV display for Hive headquarters that shows live availability across five meeting rooms in a day-view calendar. Designed for guests and employees to glance, understand what is open, and plan quickly from across the room.",
+      "A TV-friendly calendar display that shows availability for five HQ meeting rooms at a glance. Built for a shared lobby environment where clients, employees, and guests can quickly understand what’s open without asking staff.",
     type: "iframe",
     src: "https://hivefs-meetingrooms.netlify.app/",
     height: 380,
@@ -36,7 +37,7 @@ const projects: Project[] = [
     id: "tiya",
     title: "T.I.Y.A – Tutor In Your Area",
     description:
-      "A tutoring platform that helps students find nearby tutors and choose how they want to meet, including in-person, virtual, or group sessions. Built with React and Firebase with account creation, search and filtering, and clear tutor cards so users can compare options with confidence.",
+      "A tutoring platform that helps students find nearby tutors and choose how they want to meet: in person, virtual, or group sessions. The experience is account-based and designed to make browsing, comparing, and reaching out feel straightforward.",
     type: "image",
     src: "/projects/tiya-preview.png",
     alt: "Tutor In Your Area preview",
@@ -45,7 +46,7 @@ const projects: Project[] = [
     id: "freedom",
     title: "A Taste of Freedom",
     description:
-      "A promotional flyer and visual layout for Flaming Heart Ministries to invite the community to events, including food-focused gatherings. Created with strong hierarchy and readable typography so the message feels welcoming and easy to scan for any audience.",
+      "A promotional flyer created to welcome the wider community to Flaming Heart Ministries events, with a focus on food and fellowship. Designed with clear hierarchy and readable typography so the message is easy to scan and share.",
     type: "image",
     src: "/projects/freedom-preview.png",
     alt: "A Taste of Freedom flyer preview",
@@ -183,6 +184,20 @@ function ProjectCard({ project }: { project: Project }) {
       >
         {project.description}
       </p>
+
+      {/* Optional link to case studies page */}
+      <div style={{ marginTop: 16, textAlign: "center" }}>
+        <Link
+          href={`/case-studies/${project.id}`}
+          style={{
+            fontWeight: 900,
+            textDecoration: "none",
+            color: "rgba(20,20,20,0.78)",
+          }}
+        >
+          View case study →
+        </Link>
+      </div>
     </GlassCard>
   );
 }
@@ -202,10 +217,6 @@ export default function Home() {
       }}
     >
       <style>{`
-        :root{
-          --accentGrad: linear-gradient(135deg, #8b5cf6 0%, #ec4899 45%, #f97316 100%);
-        }
-
         @keyframes floatSlow {
           0% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
@@ -229,26 +240,24 @@ export default function Home() {
           background: rgba(0,0,0,0.04);
           color: rgba(15,15,15,0.88);
         }
-
         .pillBtn {
-          background: var(--accentGrad);
+          background: rgba(20,20,20,0.92);
           color: rgba(255,255,255,0.96);
           padding: 12px 18px;
           border-radius: 999px;
           font-weight: 950;
           text-decoration: none;
-          box-shadow: 0 18px 46px rgba(120, 90, 200, 0.22);
+          box-shadow: 0 16px 40px rgba(0,0,0,0.12);
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+          transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
         }
         .pillBtn:hover { 
           transform: translateY(-1px);
-          filter: saturate(1.05) brightness(1.02);
-          box-shadow: 0 22px 58px rgba(120, 90, 200, 0.26);
+          background: rgba(15,15,15,0.96);
+          box-shadow: 0 20px 46px rgba(0,0,0,0.14);
         }
-
         .softBtn {
           background: rgba(255,255,255,0.78);
           color: rgba(15,15,15,0.92);
@@ -295,13 +304,12 @@ export default function Home() {
                   width: 34,
                   height: 34,
                   borderRadius: 12,
-                  background: "var(--accentGrad)",
+                  background: "rgba(0,0,0,0.92)",
                   color: "white",
                   display: "grid",
                   placeItems: "center",
                   fontWeight: 950,
                   letterSpacing: "-0.02em",
-                  boxShadow: "0 10px 30px rgba(120, 90, 200, 0.20)",
                 }}
                 aria-label="Logo"
                 title="Simone"
@@ -317,16 +325,15 @@ export default function Home() {
               <a className="navLink" href="#projects">
                 Work
               </a>
-              {/* NEW: Case Studies Link */}
-              <Link className="navLink" href="/case-studies">
+              <a className="navLink" href="/case-studies">
                 Case Studies
-              </Link>
+              </a>
               <a className="navLink" href="#contact">
                 Contact
               </a>
 
               <a
-                className="pillBtn"
+                className="softBtn"
                 href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -368,9 +375,9 @@ export default function Home() {
                 fontWeight: 700,
               }}
             >
-              I build human-centered interfaces with engineering discipline and
-              design taste. Explore my work below, from polished UI screens to
-              fully working web experiences.
+              I build clean, human-focused interfaces and back them with solid
+              implementation. Scroll down to explore projects built for real
+              people and real environments.
             </p>
 
             <div
@@ -385,10 +392,10 @@ export default function Home() {
                 View featured work <span aria-hidden>↓</span>
               </a>
 
-              {/* NEW: Case Studies CTA */}
-              <Link className="softBtn" href="/case-studies">
-                Read case studies
-              </Link>
+              {/* ✅ Replaces "Read case studies" and goes to About. Colors unchanged. */}
+              <a className="softBtn" href="#about">
+                Learn more about me <span aria-hidden>↓</span>
+              </a>
             </div>
           </div>
         </div>
@@ -432,7 +439,7 @@ export default function Home() {
                 }}
               >
                 <Image
-                  src="/images/og/headshot.jpg"
+                  src="/images/og/profile.jpg"
                   alt="Simone Lattimore"
                   width={220}
                   height={220}
@@ -469,9 +476,8 @@ export default function Home() {
                 >
                   My goal is to create products that are accessible, efficient,
                   and intuitive for everyone. I enjoy connecting behavioral
-                  thinking with implementation, so designs are not just visually
-                  strong, they also hold up under real constraints and real user
-                  needs.
+                  thinking with implementation, so designs stay practical and
+                  hold up under real constraints.
                 </p>
 
                 <p
@@ -484,10 +490,10 @@ export default function Home() {
                     fontWeight: 650,
                   }}
                 >
-                  I&apos;m especially interested in how people navigate everyday
-                  experiences like search, scheduling, onboarding, and
-                  accessibility, and how small interface decisions can make
-                  those experiences feel clearer and easier to complete.
+                  I&apos;m especially interested in everyday experiences like
+                  search, scheduling, onboarding, and accessibility, and how small
+                  interface decisions can make tasks feel clearer from start to
+                  finish.
                 </p>
               </div>
             </div>
@@ -514,21 +520,6 @@ export default function Home() {
             {projects.map((p) => (
               <ProjectCard key={p.id} project={p} />
             ))}
-          </div>
-
-          {/* NEW: CTA to case studies */}
-          <div style={{ marginTop: 42, textAlign: "center" }}>
-            <Link
-              href="/case-studies"
-              className="pillBtn"
-              style={{
-                display: "inline-flex",
-                fontSize: 17,
-                padding: "14px 24px",
-              }}
-            >
-              View detailed case studies →
-            </Link>
           </div>
         </div>
       </SectionShell>
