@@ -317,6 +317,10 @@ export default function Home() {
               <a className="navLink" href="#projects">
                 Work
               </a>
+              {/* NEW: Case Studies Link */}
+              <Link className="navLink" href="/case-studies">
+                Case Studies
+              </Link>
               <a className="navLink" href="#contact">
                 Contact
               </a>
@@ -381,9 +385,10 @@ export default function Home() {
                 View featured work <span aria-hidden>↓</span>
               </a>
 
-              <a className="softBtn" href="#about">
-                Learn more
-              </a>
+              {/* NEW: Case Studies CTA */}
+              <Link className="softBtn" href="/case-studies">
+                Read case studies
+              </Link>
             </div>
           </div>
         </div>
@@ -510,6 +515,21 @@ export default function Home() {
               <ProjectCard key={p.id} project={p} />
             ))}
           </div>
+
+          {/* NEW: CTA to case studies */}
+          <div style={{ marginTop: 42, textAlign: "center" }}>
+            <Link
+              href="/case-studies"
+              className="pillBtn"
+              style={{
+                display: "inline-flex",
+                fontSize: 17,
+                padding: "14px 24px",
+              }}
+            >
+              View detailed case studies →
+            </Link>
+          </div>
         </div>
       </SectionShell>
 
@@ -537,7 +557,6 @@ export default function Home() {
                 textAlign: "center",
               }}
             >
-              {/* UPDATED: clickable email */}
               <p
                 style={{
                   margin: 0,
