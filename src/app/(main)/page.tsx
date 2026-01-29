@@ -28,7 +28,7 @@ const projects: Project[] = [
     id: "hive",
     title: "Hive Meeting Rooms Display",
     description:
-      "Architected a real-time meeting room availability display for 5 rooms and deployed it to a building-wide TV monitor. Combined Power BI and Power Automate with a clean HTML, CSS, and JavaScript presentation layer, plus Java and SQL integration, so teams can check status at a glance and navigate the office faster.",
+      "A live, TV-friendly meeting room experience designed for quick scanning and clear decision-making. Built to prioritize readability, accessibility, and real-world usability on shared displays.",
     type: "iframe",
     src: "https://hivefs-meetingrooms.netlify.app/",
     height: 380,
@@ -37,7 +37,7 @@ const projects: Project[] = [
     id: "tiya",
     title: "T.I.Y.A – Tutor In Your Area",
     description:
-      "Built a proximity-based tutor discovery experience that helps students find support quickly. Designed the interface in Figma, then implemented the core flows in JavaScript with Firebase and MySQL, focusing on scannable cards, clear filtering and sorting, and an easy path from search to booking.",
+      "A tutor discovery platform built with React and Firebase, featuring ZIP-based location search, sorting, and booking flows. Designed in Figma with user-centered UI decisions that make comparing options feel simple and intentional.",
     type: "image",
     src: "/projects/tiya-preview.png",
     alt: "Tutor In Your Area preview",
@@ -46,7 +46,7 @@ const projects: Project[] = [
     id: "freedom",
     title: "A Taste of Freedom",
     description:
-      "Created a flyer and visual identity for a community campaign, designed to be welcoming and easy to read across audiences. Improved font legibility, spacing, and visual hierarchy so key details are fast to scan, accessible, and consistent across print and digital sharing.",
+      "A visual identity and flyer design for a community campaign by Flaming Heart Ministries. Built with strong hierarchy and accessible typography to keep the message clear, inviting, and easy to scan.",
     type: "image",
     src: "/projects/freedom-preview.png",
     alt: "A Taste of Freedom flyer preview",
@@ -215,55 +215,52 @@ export default function Home() {
         .headlineGlow {
           text-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
-
-        /* Make sure Once UI/global styles can't override link colors */
         .navLink {
-          color: rgba(25,25,25,0.72) !important;
-          text-decoration: none !important;
+          color: rgba(25,25,25,0.72);
+          text-decoration: none;
           font-weight: 800;
           padding: 10px 12px;
           border-radius: 999px;
         }
         .navLink:hover {
           background: rgba(0,0,0,0.04);
-          color: rgba(15,15,15,0.88) !important;
+          color: rgba(15,15,15,0.88);
         }
 
-        /* NEW PALETTE: no black button, no blue text */
         .pillBtn {
-          background: linear-gradient(135deg, #7C3AED 0%, #DB2777 100%) !important;
-          color: rgba(255,255,255,0.98) !important;
+          background: rgba(20,20,20,0.92);
+          color: rgba(255,255,255,0.96);
           padding: 12px 18px;
           border-radius: 999px;
           font-weight: 950;
-          text-decoration: none !important;
-          box-shadow: 0 16px 40px rgba(124,58,237,0.18);
+          text-decoration: none;
+          box-shadow: 0 16px 40px rgba(0,0,0,0.12);
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+          transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
         }
-        .pillBtn:hover {
+        .pillBtn:hover { 
           transform: translateY(-1px);
-          filter: saturate(1.05) brightness(0.98);
-          box-shadow: 0 20px 46px rgba(219,39,119,0.20);
+          background: rgba(15,15,15,0.96);
+          box-shadow: 0 20px 46px rgba(0,0,0,0.14);
         }
 
         .softBtn {
-          background: rgba(255,255,255,0.78) !important;
-          color: rgba(15,15,15,0.92) !important;
+          background: rgba(255,255,255,0.78);
+          color: rgba(15,15,15,0.92);
           padding: 12px 18px;
           border-radius: 999px;
           font-weight: 900;
-          text-decoration: none !important;
+          text-decoration: none;
           border: 1px solid rgba(0,0,0,0.08);
           display: inline-flex;
           align-items: center;
           gap: 8px;
           transition: transform 160ms ease, background 160ms ease;
         }
-        .softBtn:hover {
-          background: rgba(255,255,255,0.92) !important;
+        .softBtn:hover { 
+          background: rgba(255,255,255,0.92);
           transform: translateY(-1px);
         }
       `}</style>
@@ -289,20 +286,18 @@ export default function Home() {
               gap: 12,
             }}
           >
-            {/* LEFT: just the S logo */}
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div
                 style={{
                   width: 34,
                   height: 34,
                   borderRadius: 12,
-                  background: "linear-gradient(135deg, #7C3AED 0%, #DB2777 100%)",
+                  background: "rgba(0,0,0,0.92)",
                   color: "white",
                   display: "grid",
                   placeItems: "center",
                   fontWeight: 950,
                   letterSpacing: "-0.02em",
-                  boxShadow: "0 14px 34px rgba(219,39,119,0.16)",
                 }}
                 aria-label="Logo"
                 title="Simone"
@@ -339,8 +334,6 @@ export default function Home() {
       <SectionShell>
         <div style={{ paddingTop: 64, paddingBottom: 28 }}>
           <div className="heroFloat" style={{ textAlign: "left" }}>
-            {/* REMOVED: "Portfolio • UI and UX Design" pill */}
-
             <h1
               className="headlineGlow"
               style={{
@@ -430,8 +423,8 @@ export default function Home() {
                 }}
               >
                 <Image
-                  src="/images/og/profile.jpg"
-                  alt="Simone Lattimore"
+                  src="/images/og/headshot.jpg"
+                  alt="Simone Lattimore headshot"
                   width={220}
                   height={220}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
