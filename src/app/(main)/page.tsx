@@ -4,7 +4,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 type Project =
   | {
@@ -29,7 +28,7 @@ const projects: Project[] = [
     id: "hive",
     title: "Hive Meeting Rooms Display",
     description:
-      "A live, TV-friendly meeting room experience designed for quick scanning and clear decision-making. Built to prioritize readability, accessibility, and real-world usability on shared displays.",
+      "A TV-first meeting-room availability display built for fast, low-effort scanning in a real office environment. Designed with large-type hierarchy, high-contrast states, and clear status cues so teams can make quick decisions from a distance without hunting for details.",
     type: "iframe",
     src: "https://hivefs-meetingrooms.netlify.app/",
     height: 380,
@@ -38,7 +37,7 @@ const projects: Project[] = [
     id: "tiya",
     title: "T.I.Y.A – Tutor In Your Area",
     description:
-      "A tutor discovery platform built with React and Firebase, featuring ZIP-based location search, sorting, and booking flows. Designed in Figma with user-centered UI decisions that make comparing options feel simple and intentional.",
+      "A tutor discovery experience that turns a messy search into a clean decision path. Implemented location-based filtering and sorting to help students compare tutors quickly, with UI choices that prioritize clarity, accessibility, and trust while browsing profiles and booking.",
     type: "image",
     src: "/projects/tiya-preview.png",
     alt: "Tutor In Your Area preview",
@@ -47,7 +46,7 @@ const projects: Project[] = [
     id: "freedom",
     title: "A Taste of Freedom",
     description:
-      "A visual identity and flyer design for a community campaign by Flaming Heart Ministries. Built with strong hierarchy and accessible typography to keep the message clear, inviting, and easy to scan.",
+      "A campaign flyer and visual layout designed to guide attention in seconds. Built with strong typography, readable spacing, and approachable color contrast so the message stays clear on first glance and remains accessible across audiences and print contexts.",
     type: "image",
     src: "/projects/freedom-preview.png",
     alt: "A Taste of Freedom flyer preview",
@@ -190,8 +189,6 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export default function Home() {
-  const [aboutImgSrc, setAboutImgSrc] = React.useState("/images/og/headshot.jpg");
-
   return (
     <main
       style={{
@@ -206,6 +203,15 @@ export default function Home() {
       }}
     >
       <style>{`
+        :root{
+          /* OMBRE ACCENT (matches S + primary buttons) */
+          --accentA: #8b5cf6;
+          --accentB: #ec4899;
+          --accentC: #f59e0b;
+          --accentGradient: linear-gradient(135deg, var(--accentA) 0%, var(--accentB) 55%, var(--accentC) 120%);
+          --accentGlow: 0 22px 55px rgba(236,72,153,0.22), 0 10px 22px rgba(139,92,246,0.16);
+        }
+
         @keyframes floatSlow {
           0% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
@@ -218,6 +224,7 @@ export default function Home() {
         .headlineGlow {
           text-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
+
         .navLink {
           color: rgba(25,25,25,0.72);
           text-decoration: none;
@@ -230,31 +237,24 @@ export default function Home() {
           color: rgba(15,15,15,0.88);
         }
 
-        /* RESTORED OMBRE / GLOW BUTTON */
+        /* PRIMARY BUTTON = OMBRE */
         .pillBtn {
-          background: linear-gradient(135deg, #1a1a1a 0%, #101010 35%, #2b2b2b 100%);
-          color: rgba(255,255,255,0.96);
+          background: var(--accentGradient);
+          color: rgba(255,255,255,0.98);
           padding: 12px 18px;
           border-radius: 999px;
           font-weight: 950;
           text-decoration: none;
-          box-shadow:
-            0 18px 46px rgba(0,0,0,0.18),
-            0 10px 26px rgba(255, 120, 190, 0.12),
-            0 10px 26px rgba(120, 160, 255, 0.12);
+          box-shadow: var(--accentGlow);
           display: inline-flex;
           align-items: center;
           gap: 8px;
           transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
-          border: 1px solid rgba(255,255,255,0.10);
         }
         .pillBtn:hover { 
           transform: translateY(-1px);
-          filter: brightness(1.06);
-          box-shadow:
-            0 22px 56px rgba(0,0,0,0.22),
-            0 12px 30px rgba(255, 120, 190, 0.14),
-            0 12px 30px rgba(120, 160, 255, 0.14);
+          filter: brightness(1.03) saturate(1.03);
+          box-shadow: 0 26px 62px rgba(236,72,153,0.26), 0 12px 26px rgba(139,92,246,0.18);
         }
 
         .softBtn {
@@ -297,20 +297,20 @@ export default function Home() {
               gap: 12,
             }}
           >
+            {/* LEFT: just the S badge */}
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div
                 style={{
                   width: 34,
                   height: 34,
                   borderRadius: 12,
-                  background:
-                    "linear-gradient(135deg, rgba(255,120,190,0.95), rgba(120,160,255,0.95))",
+                  background: "var(--accentGradient)",
                   color: "white",
                   display: "grid",
                   placeItems: "center",
                   fontWeight: 950,
                   letterSpacing: "-0.02em",
-                  boxShadow: "0 12px 26px rgba(0,0,0,0.12)",
+                  boxShadow: "var(--accentGlow)",
                 }}
                 aria-label="Logo"
                 title="Simone"
@@ -330,11 +330,13 @@ export default function Home() {
                 Contact
               </a>
 
+              {/* Résumé button = same ombre as S + other primary buttons */}
               <a
-                className="softBtn"
+                className="pillBtn"
                 href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
+                style={{ padding: "11px 16px" }}
               >
                 Résumé
               </a>
@@ -347,6 +349,8 @@ export default function Home() {
       <SectionShell>
         <div style={{ paddingTop: 64, paddingBottom: 28 }}>
           <div className="heroFloat" style={{ textAlign: "left" }}>
+            {/* REMOVED: Portfolio / UI and UX Design badge */}
+
             <h1
               className="headlineGlow"
               style={{
@@ -435,14 +439,14 @@ export default function Home() {
                   flex: "0 0 auto",
                 }}
               >
+                {/* FIXED: use your new headshot file */}
                 <Image
-                  src={aboutImgSrc}
-                  alt="Simone Lattimore headshot"
+                  src="/images/og/headshot.jpg"
+                  alt="Simone Lattimore"
                   width={220}
                   height={220}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   priority
-                  onError={() => setAboutImgSrc("/images/og/profile.jpg")}
                 />
               </div>
 
