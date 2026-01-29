@@ -1,5 +1,4 @@
 // src/app/(main)/page.tsx
-
 "use client";
 
 import Image from "next/image";
@@ -28,7 +27,7 @@ const projects: Project[] = [
     id: "hive",
     title: "Hive Meeting Rooms Display",
     description:
-      "An automated meeting room availability display for five rooms, built for a shared office TV. Designed for quick scanning from a distance with clear room status and readable layout. Built with HTML, CSS, and JavaScript, supported by Power BI and Power Automate to keep the calendar status current with minimal manual upkeep.",
+      "A TV display for Hive headquarters that shows live availability across five meeting rooms in a day-view calendar. Designed for guests and employees to glance, understand what is open, and plan quickly from across the room.",
     type: "iframe",
     src: "https://hivefs-meetingrooms.netlify.app/",
     height: 380,
@@ -37,7 +36,7 @@ const projects: Project[] = [
     id: "tiya",
     title: "T.I.Y.A – Tutor In Your Area",
     description:
-      "A tutor finder focused on proximity and fast decision making. Users can search by location, compare tutors with filters and sorting, and open profiles to take the next step. Built with Java and JavaScript with Firebase and MySQL, and designed in Figma with an emphasis on clear information hierarchy and accessible controls.",
+      "A tutoring platform that helps students find nearby tutors and choose how they want to meet, including in-person, virtual, or group sessions. Built with React and Firebase with account creation, search and filtering, and clear tutor cards so users can compare options with confidence.",
     type: "image",
     src: "/projects/tiya-preview.png",
     alt: "Tutor In Your Area preview",
@@ -46,7 +45,7 @@ const projects: Project[] = [
     id: "freedom",
     title: "A Taste of Freedom",
     description:
-      "Flyer and brochure design for a Flaming Heart Ministries community campaign. Built around strong visual hierarchy and legible typography so key details stand out quickly. Layout and contrast choices were made to keep the message easy to read on both mobile and print.",
+      "A promotional flyer and visual layout for Flaming Heart Ministries to invite the community to events, including food-focused gatherings. Created with strong hierarchy and readable typography so the message feels welcoming and easy to scan for any audience.",
     type: "image",
     src: "/projects/freedom-preview.png",
     alt: "A Taste of Freedom flyer preview",
@@ -203,6 +202,10 @@ export default function Home() {
       }}
     >
       <style>{`
+        :root{
+          --accentGrad: linear-gradient(135deg, #8b5cf6 0%, #ec4899 45%, #f97316 100%);
+        }
+
         @keyframes floatSlow {
           0% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
@@ -227,23 +230,24 @@ export default function Home() {
           color: rgba(15,15,15,0.88);
         }
 
+        /* OMBRE/GRADIENT BUTTONS (back to the earlier vibe) */
         .pillBtn {
-          background: rgba(20,20,20,0.92);
+          background: var(--accentGrad);
           color: rgba(255,255,255,0.96);
           padding: 12px 18px;
           border-radius: 999px;
           font-weight: 950;
           text-decoration: none;
-          box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+          box-shadow: 0 18px 46px rgba(120, 90, 200, 0.22);
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+          transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
         }
         .pillBtn:hover { 
           transform: translateY(-1px);
-          background: rgba(15,15,15,0.96);
-          box-shadow: 0 20px 46px rgba(0,0,0,0.14);
+          filter: saturate(1.05) brightness(1.02);
+          box-shadow: 0 22px 58px rgba(120, 90, 200, 0.26);
         }
 
         .softBtn {
@@ -292,12 +296,13 @@ export default function Home() {
                   width: 34,
                   height: 34,
                   borderRadius: 12,
-                  background: "rgba(0,0,0,0.92)",
+                  background: "var(--accentGrad)",
                   color: "white",
                   display: "grid",
                   placeItems: "center",
                   fontWeight: 950,
                   letterSpacing: "-0.02em",
+                  boxShadow: "0 10px 30px rgba(120, 90, 200, 0.20)",
                 }}
                 aria-label="Logo"
                 title="Simone"
@@ -317,8 +322,9 @@ export default function Home() {
                 Contact
               </a>
 
+              {/* Resume button uses the same gradient color */}
               <a
-                className="softBtn"
+                className="pillBtn"
                 href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
