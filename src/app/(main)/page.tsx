@@ -28,7 +28,7 @@ const projects: Project[] = [
     id: "hive",
     title: "Hive Meeting Rooms Display",
     description:
-      "A TV-first meeting-room availability display built for fast, low-effort scanning in a real office environment. Designed with large-type hierarchy, high-contrast states, and clear status cues so teams can make quick decisions from a distance without hunting for details.",
+      "An automated meeting room availability display for five rooms, built for a shared office TV. Designed for quick scanning from a distance with clear room status and readable layout. Built with HTML, CSS, and JavaScript, supported by Power BI and Power Automate to keep the calendar status current with minimal manual upkeep.",
     type: "iframe",
     src: "https://hivefs-meetingrooms.netlify.app/",
     height: 380,
@@ -37,7 +37,7 @@ const projects: Project[] = [
     id: "tiya",
     title: "T.I.Y.A – Tutor In Your Area",
     description:
-      "A tutor discovery experience that turns a messy search into a clean decision path. Implemented location-based filtering and sorting to help students compare tutors quickly, with UI choices that prioritize clarity, accessibility, and trust while browsing profiles and booking.",
+      "A tutor finder focused on proximity and fast decision making. Users can search by location, compare tutors with filters and sorting, and open profiles to take the next step. Built with Java and JavaScript with Firebase and MySQL, and designed in Figma with an emphasis on clear information hierarchy and accessible controls.",
     type: "image",
     src: "/projects/tiya-preview.png",
     alt: "Tutor In Your Area preview",
@@ -46,7 +46,7 @@ const projects: Project[] = [
     id: "freedom",
     title: "A Taste of Freedom",
     description:
-      "A campaign flyer and visual layout designed to guide attention in seconds. Built with strong typography, readable spacing, and approachable color contrast so the message stays clear on first glance and remains accessible across audiences and print contexts.",
+      "Flyer and brochure design for a Flaming Heart Ministries community campaign. Built around strong visual hierarchy and legible typography so key details stand out quickly. Layout and contrast choices were made to keep the message easy to read on both mobile and print.",
     type: "image",
     src: "/projects/freedom-preview.png",
     alt: "A Taste of Freedom flyer preview",
@@ -203,15 +203,6 @@ export default function Home() {
       }}
     >
       <style>{`
-        :root{
-          /* OMBRE ACCENT (matches S + primary buttons) */
-          --accentA: #8b5cf6;
-          --accentB: #ec4899;
-          --accentC: #f59e0b;
-          --accentGradient: linear-gradient(135deg, var(--accentA) 0%, var(--accentB) 55%, var(--accentC) 120%);
-          --accentGlow: 0 22px 55px rgba(236,72,153,0.22), 0 10px 22px rgba(139,92,246,0.16);
-        }
-
         @keyframes floatSlow {
           0% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
@@ -224,7 +215,6 @@ export default function Home() {
         .headlineGlow {
           text-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
-
         .navLink {
           color: rgba(25,25,25,0.72);
           text-decoration: none;
@@ -237,24 +227,23 @@ export default function Home() {
           color: rgba(15,15,15,0.88);
         }
 
-        /* PRIMARY BUTTON = OMBRE */
         .pillBtn {
-          background: var(--accentGradient);
-          color: rgba(255,255,255,0.98);
+          background: rgba(20,20,20,0.92);
+          color: rgba(255,255,255,0.96);
           padding: 12px 18px;
           border-radius: 999px;
           font-weight: 950;
           text-decoration: none;
-          box-shadow: var(--accentGlow);
+          box-shadow: 0 16px 40px rgba(0,0,0,0.12);
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+          transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
         }
         .pillBtn:hover { 
           transform: translateY(-1px);
-          filter: brightness(1.03) saturate(1.03);
-          box-shadow: 0 26px 62px rgba(236,72,153,0.26), 0 12px 26px rgba(139,92,246,0.18);
+          background: rgba(15,15,15,0.96);
+          box-shadow: 0 20px 46px rgba(0,0,0,0.14);
         }
 
         .softBtn {
@@ -297,20 +286,18 @@ export default function Home() {
               gap: 12,
             }}
           >
-            {/* LEFT: just the S badge */}
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div
                 style={{
                   width: 34,
                   height: 34,
                   borderRadius: 12,
-                  background: "var(--accentGradient)",
+                  background: "rgba(0,0,0,0.92)",
                   color: "white",
                   display: "grid",
                   placeItems: "center",
                   fontWeight: 950,
                   letterSpacing: "-0.02em",
-                  boxShadow: "var(--accentGlow)",
                 }}
                 aria-label="Logo"
                 title="Simone"
@@ -330,13 +317,11 @@ export default function Home() {
                 Contact
               </a>
 
-              {/* Résumé button = same ombre as S + other primary buttons */}
               <a
-                className="pillBtn"
+                className="softBtn"
                 href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ padding: "11px 16px" }}
               >
                 Résumé
               </a>
@@ -349,8 +334,6 @@ export default function Home() {
       <SectionShell>
         <div style={{ paddingTop: 64, paddingBottom: 28 }}>
           <div className="heroFloat" style={{ textAlign: "left" }}>
-            {/* REMOVED: Portfolio / UI and UX Design badge */}
-
             <h1
               className="headlineGlow"
               style={{
@@ -439,7 +422,6 @@ export default function Home() {
                   flex: "0 0 auto",
                 }}
               >
-                {/* FIXED: use your new headshot file */}
                 <Image
                   src="/images/og/headshot.jpg"
                   alt="Simone Lattimore"
@@ -559,7 +541,7 @@ export default function Home() {
                   fontWeight: 750,
                 }}
               >
-                📧 Simonee8420@gmail.com
+                📧 Slattimore2@student.gsu.edu
               </p>
 
               <p
