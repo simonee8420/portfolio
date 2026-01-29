@@ -1,576 +1,615 @@
+// src/app/(main)/page.tsx
+
 "use client";
 
-import React from "react";
-import { Column, Heading, Text, Button } from "@once-ui-system/core";
+import Image from "next/image";
+import Link from "next/link";
 
 type Project =
   | {
+      id: string;
       title: string;
-      subtitle?: string;
       description: string;
-      kind: "embed";
+      type: "iframe";
       src: string;
+      height?: number;
     }
   | {
+      id: string;
       title: string;
-      subtitle?: string;
       description: string;
-      kind: "image";
+      type: "image";
       src: string;
       alt: string;
     };
 
-const PROJECTS: Project[] = [
+const projects: Project[] = [
   {
+    id: "hive",
     title: "Hive Meeting Rooms Display",
-    subtitle: "Availability dashboard for office navigation",
-    kind: "embed",
+    description:
+      "Architected a real-time meeting room availability display for 5 rooms and deployed it to a building-wide TV monitor. Combined Power BI and Power Automate with a clean HTML, CSS, and JavaScript presentation layer, plus Java and SQL integration, so teams can check status at a glance and navigate the office faster.",
+    type: "iframe",
     src: "https://hivefs-meetingrooms.netlify.app/",
-    description:
-      "Built a live meeting-room availability display that makes it easy to spot open rooms at a glance. Designed the layout for fast scanning, clear status states, and smoother decision-making in shared spaces, then shipped it as a working system that stays updated for everyday use.",
+    height: 380,
   },
   {
+    id: "tiya",
     title: "T.I.Y.A – Tutor In Your Area",
-    subtitle: "Proximity-based tutor discovery experience",
-    kind: "image",
-    src: "/projects/tiya-preview.png",
-    alt: "TIYA project preview",
     description:
-      "Designed and developed a tutor discovery flow centered on real user needs: quick searching, simple filtering, and an interface that helps students choose confidently. Balanced structure and clarity across key screens so users can move from browsing to booking without confusion.",
+      "Built a proximity-based tutor discovery experience that helps students find support quickly. Designed the interface in Figma, then implemented the core flows in JavaScript with Firebase and MySQL, focusing on scannable cards, clear filtering and sorting, and an easy path from search to booking.",
+    type: "image",
+    src: "/projects/tiya-preview.png",
+    alt: "Tutor In Your Area preview",
   },
   {
+    id: "freedom",
     title: "A Taste of Freedom",
-    subtitle: "Visual identity and flyer design",
-    kind: "image",
-    src: "/projects/freedom-preview.png",
-    alt: "Taste of Freedom flyer preview",
     description:
-      "Created a print-ready flyer with stronger typography hierarchy and clearer reading order. Focused on legibility, spacing, and visual rhythm so the message stays welcoming and easy to understand for a wide audience.",
+      "Created a flyer and visual identity for a community campaign, designed to be welcoming and easy to read across audiences. Improved font legibility, spacing, and visual hierarchy so key details are fast to scan, accessible, and consistent across print and digital sharing.",
+    type: "image",
+    src: "/projects/freedom-preview.png",
+    alt: "A Taste of Freedom flyer preview",
   },
 ];
 
-export default function Home() {
+function SectionShell({
+  id,
+  children,
+  width = "min(1120px, 92%)",
+}: {
+  id?: string;
+  children: React.ReactNode;
+  width?: string;
+}) {
   return (
-    <Column
-      id="top"
-      fillWidth
-      center
-      gap="xl"
+    <section
+      id={id}
       style={{
-        minHeight: "100vh",
-        color: "var(--ink)",
-        textAlign: "left",
+        width,
+        margin: "0 auto",
+        scrollMarginTop: 96,
       }}
     >
-      {/* ===== Global styles for this page ===== */}
-      <style jsx global>{`
-        :root {
-          --bg0: #fbfaf8;
-          --bg1: #f6f2ff;
-          --bg2: #eaf4ff;
+      {children}
+    </section>
+  );
+}
 
-          --ink: #16161d;
-          --muted: rgba(22, 22, 29, 0.72);
+function GlassCard({
+  children,
+  padding = "28px",
+}: {
+  children: React.ReactNode;
+  padding?: string;
+}) {
+  return (
+    <div
+      style={{
+        borderRadius: 28,
+        padding,
+        background: "rgba(255,255,255,0.62)",
+        border: "1px solid rgba(20, 20, 20, 0.08)",
+        boxShadow:
+          "0 26px 70px rgba(30, 30, 30, 0.10), 0 1px 0 rgba(255,255,255,0.9) inset",
+        backdropFilter: "blur(10px)",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
-          --card: rgba(255, 255, 255, 0.72);
-          --cardBorder: rgba(22, 22, 29, 0.10);
+function ProjectCard({ project }: { project: Project }) {
+  const previewHeight = project.type === "iframe" ? project.height ?? 360 : 360;
 
-          --accent: #6d28d9; /* violet */
-          --accent2: #0ea5e9; /* sky */
-          --accentSoft: rgba(109, 40, 217, 0.12);
+  return (
+    <GlassCard padding="26px">
+      <div
+        style={{
+          width: "100%",
+          borderRadius: 22,
+          padding: 16,
+          background: "rgba(255,255,255,0.92)",
+          boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.06)",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            borderRadius: 18,
+            overflow: "hidden",
+            background: "#fff",
+            boxShadow: "0 18px 44px rgba(0,0,0,0.10)",
+          }}
+        >
+          {project.type === "iframe" ? (
+            <iframe
+              src={project.src}
+              title={project.title}
+              loading="lazy"
+              style={{
+                width: "100%",
+                height: `${previewHeight}px`,
+                border: 0,
+                display: "block",
+                background: "white",
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                height: `${previewHeight}px`,
+              }}
+            >
+              <Image
+                src={project.src}
+                alt={project.alt}
+                fill
+                sizes="(max-width: 900px) 92vw, 1120px"
+                style={{ objectFit: "contain", background: "white" }}
+              />
+            </div>
+          )}
+        </div>
+      </div>
 
-          --btnPrimaryBg: #6d28d9;
-          --btnPrimaryText: #ffffff;
+      <h3
+        style={{
+          marginTop: 22,
+          marginBottom: 10,
+          fontSize: 30,
+          fontWeight: 950,
+          letterSpacing: "-0.03em",
+          textAlign: "center",
+          color: "rgba(20,20,20,0.92)",
+        }}
+      >
+        {project.title}
+      </h3>
 
-          --btnAltBg: #0f172a; /* deep slate */
-          --btnAltText: #ffffff;
+      <p
+        style={{
+          margin: 0,
+          color: "rgba(20,20,20,0.72)",
+          lineHeight: 1.9,
+          fontSize: 16,
+          maxWidth: 980,
+          marginLeft: "auto",
+          marginRight: "auto",
+          textAlign: "center",
+        }}
+      >
+        {project.description}
+      </p>
+    </GlassCard>
+  );
+}
 
-          --pillBg: rgba(255, 255, 255, 0.80);
-          --shadow: 0 18px 60px rgba(17, 24, 39, 0.10);
+export default function Home() {
+  return (
+    <main
+      style={{
+        minHeight: "100vh",
+        color: "rgba(20,20,20,0.92)",
+        background:
+          "radial-gradient(900px 520px at 15% 10%, rgba(255, 120, 190, 0.18), rgba(255,255,255,0) 60%)," +
+          "radial-gradient(820px 520px at 85% 15%, rgba(120, 160, 255, 0.20), rgba(255,255,255,0) 62%)," +
+          "radial-gradient(820px 520px at 55% 75%, rgba(255, 210, 120, 0.20), rgba(255,255,255,0) 62%)," +
+          "linear-gradient(180deg, #fbfaf6 0%, #f7f6f2 38%, #f3f2ee 100%)",
+        paddingBottom: 100,
+      }}
+    >
+      <style>{`
+        @keyframes floatSlow {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+          100% { transform: translateY(0px); }
+        }
+        .heroFloat {
+          animation: floatSlow 7s ease-in-out infinite;
+          will-change: transform;
+        }
+        .headlineGlow {
+          text-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
 
-        html,
-        body {
-          background: radial-gradient(
-              1000px 650px at 18% 18%,
-              rgba(109, 40, 217, 0.18),
-              transparent 60%
-            ),
-            radial-gradient(
-              900px 700px at 82% 22%,
-              rgba(14, 165, 233, 0.16),
-              transparent 60%
-            ),
-            linear-gradient(120deg, var(--bg0), var(--bg1), var(--bg2));
-          color: var(--ink);
+        /* Make sure Once UI/global styles can't override link colors */
+        .navLink {
+          color: rgba(25,25,25,0.72) !important;
+          text-decoration: none !important;
+          font-weight: 800;
+          padding: 10px 12px;
+          border-radius: 999px;
+        }
+        .navLink:hover {
+          background: rgba(0,0,0,0.04);
+          color: rgba(15,15,15,0.88) !important;
         }
 
-        /* Subtle “float” animation for the hero content */
-        @keyframes softFloat {
-          0% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-8px);
-          }
-          100% {
-            transform: translateY(0px);
-          }
+        /* NEW PALETTE: no black button, no blue text */
+        .pillBtn {
+          background: linear-gradient(135deg, #7C3AED 0%, #DB2777 100%) !important;
+          color: rgba(255,255,255,0.98) !important;
+          padding: 12px 18px;
+          border-radius: 999px;
+          font-weight: 950;
+          text-decoration: none !important;
+          box-shadow: 0 16px 40px rgba(124,58,237,0.18);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+        }
+        .pillBtn:hover {
+          transform: translateY(-1px);
+          filter: saturate(1.05) brightness(0.98);
+          box-shadow: 0 20px 46px rgba(219,39,119,0.20);
         }
 
-        /* Smooth scrolling for anchor links */
-        html {
-          scroll-behavior: smooth;
+        .softBtn {
+          background: rgba(255,255,255,0.78) !important;
+          color: rgba(15,15,15,0.92) !important;
+          padding: 12px 18px;
+          border-radius: 999px;
+          font-weight: 900;
+          text-decoration: none !important;
+          border: 1px solid rgba(0,0,0,0.08);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          transition: transform 160ms ease, background 160ms ease;
         }
-
-        /* Better iframe rendering inside rounded cards */
-        .project-embed {
-          width: 100%;
-          height: 360px;
-          border: 0;
-          border-radius: 18px;
-          background: white;
-        }
-
-        @media (min-width: 900px) {
-          .project-embed {
-            height: 420px;
-          }
+        .softBtn:hover {
+          background: rgba(255,255,255,0.92) !important;
+          transform: translateY(-1px);
         }
       `}</style>
 
-      {/* ===== Header ===== */}
+      {/* Sticky Header */}
       <div
         style={{
           position: "sticky",
           top: 0,
-          width: "100%",
-          zIndex: 30,
+          zIndex: 50,
+          padding: "14px 0",
           backdropFilter: "blur(10px)",
-          background: "rgba(251, 250, 248, 0.75)",
-          borderBottom: "1px solid rgba(22, 22, 29, 0.06)",
+          background: "rgba(251, 250, 246, 0.70)",
+          borderBottom: "1px solid rgba(0,0,0,0.06)",
         }}
       >
-        <div
-          style={{
-            maxWidth: 1120,
-            margin: "0 auto",
-            padding: "16px 18px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 14,
-          }}
-        >
-          {/* Logo button (S) */}
-          <a
-            href="#top"
-            aria-label="Home"
-            style={{
-              width: 44,
-              height: 44,
-              borderRadius: 999,
-              display: "grid",
-              placeItems: "center",
-              textDecoration: "none",
-              background: "linear-gradient(135deg, var(--accent), var(--accent2))",
-              color: "white",
-              fontWeight: 800,
-              boxShadow: "0 12px 30px rgba(109, 40, 217, 0.22)",
-            }}
-          >
-            S
-          </a>
-
-          {/* Nav */}
-          <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-            <a
-              href="#about"
-              style={{
-                color: "var(--ink)",
-                textDecoration: "none",
-                fontWeight: 650,
-              }}
-            >
-              About
-            </a>
-            <a
-              href="#work"
-              style={{
-                color: "var(--ink)",
-                textDecoration: "none",
-                fontWeight: 650,
-              }}
-            >
-              Work
-            </a>
-            <a
-              href="#contact"
-              style={{
-                color: "var(--ink)",
-                textDecoration: "none",
-                fontWeight: 650,
-              }}
-            >
-              Contact
-            </a>
-
-            <a
-              href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                textDecoration: "none",
-                fontWeight: 750,
-                padding: "10px 14px",
-                borderRadius: 999,
-                background: "rgba(109, 40, 217, 0.10)",
-                border: "1px solid rgba(109, 40, 217, 0.25)",
-                color: "var(--accent)",
-              }}
-            >
-              Résumé
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* ===== Hero ===== */}
-      <div style={{ width: "100%", padding: "34px 0 10px" }}>
-        <div
-          style={{
-            maxWidth: 1120,
-            margin: "0 auto",
-            padding: "0 18px",
-          }}
-        >
+        <SectionShell width="min(1120px, 94%)">
           <div
             style={{
-              borderRadius: 30,
-              padding: "44px 28px",
-              background: "rgba(255,255,255,0.62)",
-              border: "1px solid rgba(22,22,29,0.08)",
-              boxShadow: "var(--shadow)",
-              position: "relative",
-              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 12,
             }}
           >
-            {/* glow */}
-            <div
-              style={{
-                position: "absolute",
-                inset: -2,
-                background:
-                  "radial-gradient(600px 260px at 20% 20%, rgba(109,40,217,0.14), transparent 55%), radial-gradient(520px 240px at 78% 30%, rgba(14,165,233,0.12), transparent 55%)",
-                pointerEvents: "none",
-              }}
-            />
-
-            <div style={{ position: "relative", animation: "softFloat 6s ease-in-out infinite" }}>
-              <Heading
-                variant="display-strong-xl"
-                style={{
-                  color: "var(--ink)",
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1.02,
-                }}
-              >
-                Welcome to my portfolio.
-                <br />
-                I&apos;m Simone.
-              </Heading>
-
-              <Text
-                variant="heading-default-l"
-                style={{
-                  marginTop: 14,
-                  color: "var(--muted)",
-                  maxWidth: 820,
-                  lineHeight: 1.6,
-                  fontWeight: 600,
-                }}
-              >
-                I build human-centered interfaces with engineering discipline and design taste.
-                Explore my work below, from polished UI screens to fully working web experiences.
-              </Text>
-
-              <div style={{ display: "flex", gap: 12, marginTop: 22, flexWrap: "wrap" }}>
-                <a
-                  href="#work"
-                  style={{
-                    textDecoration: "none",
-                    background: "var(--btnAltBg)",
-                    color: "var(--btnAltText)",
-                    padding: "12px 18px",
-                    borderRadius: 999,
-                    fontWeight: 800,
-                    boxShadow: "0 14px 40px rgba(15, 23, 42, 0.18)",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 10,
-                  }}
-                >
-                  View featured work <span aria-hidden>↓</span>
-                </a>
-
-                <a
-                  href="#about"
-                  style={{
-                    textDecoration: "none",
-                    background: "var(--btnPrimaryBg)",
-                    color: "var(--btnPrimaryText)",
-                    padding: "12px 18px",
-                    borderRadius: 999,
-                    fontWeight: 800,
-                    boxShadow: "0 14px 40px rgba(109, 40, 217, 0.22)",
-                  }}
-                >
-                  Learn more
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ===== About ===== */}
-      <Column
-        id="about"
-        align="center"
-        padding="l"
-        gap="l"
-        style={{
-          width: "100%",
-          marginTop: 22,
-        }}
-      >
-        <div style={{ width: "100%", maxWidth: 1120, padding: "0 18px" }}>
-          <div
-            style={{
-              borderRadius: 30,
-              background: "rgba(255,255,255,0.70)",
-              border: "1px solid rgba(22,22,29,0.08)",
-              boxShadow: "var(--shadow)",
-              padding: "34px 26px",
-            }}
-          >
-            <Heading variant="display-strong-l" style={{ color: "var(--ink)" }}>
-              About Me
-            </Heading>
-
-            <div
-              style={{
-                marginTop: 18,
-                display: "flex",
-                gap: 22,
-                alignItems: "center",
-                justifyContent: "space-between",
-                flexWrap: "wrap",
-              }}
-            >
-              <img
-                src="/images/og/profile.jpg"
-                alt="Simone Lattimore"
-                style={{
-                  width: 190,
-                  height: 190,
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  border: "6px solid rgba(255,255,255,0.8)",
-                  boxShadow: "0 18px 50px rgba(17, 24, 39, 0.14)",
-                }}
-              />
-
-              <Text
-                variant="body-default-l"
-                style={{
-                  maxWidth: 820,
-                  color: "var(--muted)",
-                  lineHeight: 1.85,
-                  fontWeight: 600,
-                }}
-              >
-                I&apos;m a Computer Science graduate focused on the psychology behind digital interaction. I care about how
-                people scan, interpret, and act inside products, and I use that lens to shape clearer flows and cleaner
-                interfaces.
-                <br />
-                <br />
-                I&apos;m especially interested in improving everyday experiences like search, scheduling, onboarding, and
-                accessibility so products feel easier to move through and more predictable from screen to screen.
-                <br />
-                <br />
-                My goal is to create products that are accessible, efficient, and durable for everyone.
-              </Text>
-            </div>
-          </div>
-        </div>
-      </Column>
-
-      {/* ===== Work / Projects ===== */}
-      <Column
-        id="work"
-        align="center"
-        gap="l"
-        style={{
-          width: "100%",
-          marginTop: 10,
-          scrollMarginTop: "90px",
-        }}
-      >
-        <div style={{ width: "100%", maxWidth: 1120, padding: "0 18px" }}>
-          <Heading
-            variant="display-strong-l"
-            style={{ marginTop: 8, marginBottom: 14, color: "var(--ink)" }}
-          >
-            Featured Work
-          </Heading>
-
-          <div style={{ display: "grid", gap: 18 }}>
-            {PROJECTS.map((p) => (
+            {/* LEFT: just the S logo */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div
-                key={p.title}
                 style={{
-                  borderRadius: 30,
-                  background: "rgba(255,255,255,0.70)",
-                  border: "1px solid rgba(22,22,29,0.08)",
-                  boxShadow: "var(--shadow)",
-                  padding: "22px 22px 24px",
+                  width: 34,
+                  height: 34,
+                  borderRadius: 12,
+                  background: "linear-gradient(135deg, #7C3AED 0%, #DB2777 100%)",
+                  color: "white",
+                  display: "grid",
+                  placeItems: "center",
+                  fontWeight: 950,
+                  letterSpacing: "-0.02em",
+                  boxShadow: "0 14px 34px rgba(219,39,119,0.16)",
                 }}
+                aria-label="Logo"
+                title="Simone"
               >
-                {/* Visual first */}
-                <div
-                  style={{
-                    borderRadius: 22,
-                    overflow: "hidden",
-                    border: "1px solid rgba(22,22,29,0.08)",
-                    background: "white",
-                  }}
-                >
-                  {p.kind === "embed" ? (
-                    <iframe
-                      className="project-embed"
-                      src={p.src}
-                      title={p.title}
-                      loading="lazy"
-                      referrerPolicy="no-referrer"
-                    />
-                  ) : (
-                    <img
-                      src={p.src}
-                      alt={p.alt}
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        display: "block",
-                      }}
-                    />
-                  )}
-                </div>
-
-                {/* Text under visual */}
-                <div style={{ marginTop: 18, textAlign: "center" }}>
-                  <Heading variant="heading-strong-l" style={{ color: "var(--ink)" }}>
-                    {p.title}
-                  </Heading>
-
-                  {p.subtitle ? (
-                    <Text
-                      variant="body-default-m"
-                      style={{
-                        marginTop: 6,
-                        color: "rgba(22,22,29,0.70)",
-                        fontWeight: 650,
-                      }}
-                    >
-                      {p.subtitle}
-                    </Text>
-                  ) : null}
-
-                  <Text
-                    variant="body-default-l"
-                    style={{
-                      marginTop: 12,
-                      color: "var(--muted)",
-                      maxWidth: 920,
-                      marginLeft: "auto",
-                      marginRight: "auto",
-                      lineHeight: 1.8,
-                      fontWeight: 600,
-                    }}
-                  >
-                    {p.description}
-                  </Text>
-                </div>
+                S
               </div>
-            ))}
-          </div>
-        </div>
-      </Column>
-
-      {/* ===== Contact ===== */}
-      <Column
-        id="contact"
-        align="center"
-        padding="l"
-        gap="m"
-        style={{
-          width: "100%",
-          marginTop: 18,
-          paddingBottom: 70,
-        }}
-      >
-        <div style={{ width: "100%", maxWidth: 1120, padding: "0 18px" }}>
-          <div
-            style={{
-              borderRadius: 30,
-              background: "rgba(255,255,255,0.70)",
-              border: "1px solid rgba(22,22,29,0.08)",
-              boxShadow: "var(--shadow)",
-              padding: "30px 22px",
-              textAlign: "center",
-            }}
-          >
-            <Heading variant="display-strong-l" style={{ color: "var(--ink)" }}>
-              Contact
-            </Heading>
-
-            <div style={{ marginTop: 14, display: "grid", gap: 8 }}>
-              <Text variant="body-default-l" style={{ color: "var(--muted)", fontWeight: 650 }}>
-                📧 Slattimore2@student.gsu.edu
-              </Text>
-
-              <Text variant="body-default-l" style={{ color: "var(--muted)", fontWeight: 650 }}>
-                🔗 linkedin.com/in/simonee8420
-              </Text>
-
-              <Text variant="body-default-l" style={{ color: "var(--muted)", fontWeight: 650 }}>
-                💻 github.com/simonee8420
-              </Text>
             </div>
 
-            <div style={{ marginTop: 18 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <a className="navLink" href="#about">
+                About
+              </a>
+              <a className="navLink" href="#projects">
+                Work
+              </a>
+              <a className="navLink" href="#contact">
+                Contact
+              </a>
+
               <a
+                className="softBtn"
                 href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  background: "linear-gradient(135deg, var(--accent), var(--accent2))",
-                  color: "white",
-                  fontSize: 16,
-                  fontWeight: 800,
-                  padding: "12px 18px",
-                  borderRadius: 999,
-                  textDecoration: "none",
-                  display: "inline-block",
-                  boxShadow: "0 16px 44px rgba(109, 40, 217, 0.22)",
-                }}
               >
-                View My Résumé
+                Résumé
+              </a>
+            </div>
+          </div>
+        </SectionShell>
+      </div>
+
+      {/* HERO */}
+      <SectionShell>
+        <div style={{ paddingTop: 64, paddingBottom: 28 }}>
+          <div className="heroFloat" style={{ textAlign: "left" }}>
+            {/* REMOVED: "Portfolio • UI and UX Design" pill */}
+
+            <h1
+              className="headlineGlow"
+              style={{
+                marginTop: 18,
+                marginBottom: 14,
+                fontSize: "clamp(48px, 5.2vw, 88px)",
+                fontWeight: 1000,
+                letterSpacing: "-0.05em",
+                lineHeight: 0.98,
+              }}
+            >
+              Welcome to my portfolio.
+              <br />
+              I&apos;m Simone.
+            </h1>
+
+            <p
+              style={{
+                margin: 0,
+                maxWidth: 820,
+                fontSize: "clamp(16px, 1.7vw, 20px)",
+                lineHeight: 1.8,
+                color: "rgba(20,20,20,0.72)",
+                fontWeight: 700,
+              }}
+            >
+              I build human-centered interfaces with engineering discipline and
+              design taste. Explore my work below, from polished UI screens to
+              fully working web experiences.
+            </p>
+
+            <div
+              style={{
+                marginTop: 22,
+                display: "flex",
+                gap: 12,
+                flexWrap: "wrap",
+              }}
+            >
+              <a className="pillBtn" href="#projects">
+                View featured work <span aria-hidden>↓</span>
+              </a>
+
+              <a className="softBtn" href="#about">
+                Learn more
               </a>
             </div>
           </div>
         </div>
-      </Column>
-    </Column>
+      </SectionShell>
+
+      {/* ABOUT */}
+      <SectionShell id="about">
+        <div style={{ marginTop: 34 }}>
+          <GlassCard>
+            <h2
+              style={{
+                textAlign: "center",
+                fontSize: "clamp(30px, 3vw, 44px)",
+                fontWeight: 1000,
+                letterSpacing: "-0.04em",
+                margin: "0 0 22px",
+              }}
+            >
+              About Me
+            </h2>
+
+            <div
+              style={{
+                display: "flex",
+                gap: 26,
+                justifyContent: "center",
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <div
+                style={{
+                  width: 220,
+                  height: 220,
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  border: "1px solid rgba(0,0,0,0.08)",
+                  boxShadow: "0 18px 44px rgba(0,0,0,0.10)",
+                  background: "rgba(255,255,255,0.55)",
+                  flex: "0 0 auto",
+                }}
+              >
+                <Image
+                  src="/images/og/profile.jpg"
+                  alt="Simone Lattimore"
+                  width={220}
+                  height={220}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  priority
+                />
+              </div>
+
+              <div style={{ maxWidth: 760 }}>
+                <p
+                  style={{
+                    margin: 0,
+                    color: "rgba(20,20,20,0.74)",
+                    lineHeight: 1.95,
+                    fontSize: 16,
+                    fontWeight: 650,
+                  }}
+                >
+                  I&apos;m Simone Lattimore, a Computer Science graduate focused
+                  on UI and UX design. I care about the moments where users
+                  pause, second-guess, or abandon a task, and I like turning
+                  those moments into clear, calm interactions.
+                </p>
+
+                <p
+                  style={{
+                    marginTop: 14,
+                    marginBottom: 0,
+                    color: "rgba(20,20,20,0.74)",
+                    lineHeight: 1.95,
+                    fontSize: 16,
+                    fontWeight: 650,
+                  }}
+                >
+                  My goal is to create products that are accessible, efficient,
+                  and intuitive for everyone. I enjoy connecting behavioral
+                  thinking with implementation, so designs are not just visually
+                  strong, they also hold up under real constraints and real user
+                  needs.
+                </p>
+
+                <p
+                  style={{
+                    marginTop: 14,
+                    marginBottom: 0,
+                    color: "rgba(20,20,20,0.74)",
+                    lineHeight: 1.95,
+                    fontSize: 16,
+                    fontWeight: 650,
+                  }}
+                >
+                  I&apos;m especially interested in how people navigate everyday
+                  experiences like search, scheduling, onboarding, and
+                  accessibility, and how small interface decisions can make
+                  those experiences feel clearer and easier to complete.
+                </p>
+              </div>
+            </div>
+          </GlassCard>
+        </div>
+      </SectionShell>
+
+      {/* PROJECTS */}
+      <SectionShell id="projects">
+        <div style={{ marginTop: 64 }}>
+          <h2
+            style={{
+              textAlign: "center",
+              fontSize: "clamp(34px, 3.6vw, 56px)",
+              fontWeight: 1000,
+              letterSpacing: "-0.04em",
+              margin: "0 0 28px",
+            }}
+          >
+            Featured Work
+          </h2>
+
+          <div style={{ display: "grid", gap: 34 }}>
+            {projects.map((p) => (
+              <ProjectCard key={p.id} project={p} />
+            ))}
+          </div>
+        </div>
+      </SectionShell>
+
+      {/* CONTACT */}
+      <SectionShell id="contact">
+        <div style={{ marginTop: 70 }}>
+          <GlassCard>
+            <h2
+              style={{
+                textAlign: "center",
+                fontSize: "clamp(28px, 3vw, 44px)",
+                fontWeight: 1000,
+                letterSpacing: "-0.04em",
+                margin: "0 0 18px",
+              }}
+            >
+              Contact
+            </h2>
+
+            <div
+              style={{
+                display: "grid",
+                gap: 10,
+                justifyContent: "center",
+                textAlign: "center",
+              }}
+            >
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 18,
+                  color: "rgba(20,20,20,0.72)",
+                  fontWeight: 750,
+                }}
+              >
+                📧 Slattimore2@student.gsu.edu
+              </p>
+
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 18,
+                  color: "rgba(20,20,20,0.72)",
+                  fontWeight: 750,
+                }}
+              >
+                🔗{" "}
+                <Link
+                  href="https://linkedin.com/in/simonee8420"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: "rgba(20,20,20,0.86)",
+                    textDecoration: "underline",
+                    fontWeight: 900,
+                  }}
+                >
+                  linkedin.com/in/simonee8420
+                </Link>
+              </p>
+
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 18,
+                  color: "rgba(20,20,20,0.72)",
+                  fontWeight: 750,
+                }}
+              >
+                💻{" "}
+                <Link
+                  href="https://github.com/simonee8420"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: "rgba(20,20,20,0.86)",
+                    textDecoration: "underline",
+                    fontWeight: 900,
+                  }}
+                >
+                  github.com/simonee8420
+                </Link>
+              </p>
+
+              <a
+                href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pillBtn"
+                style={{ marginTop: 10, justifySelf: "center" }}
+              >
+                View My Résumé
+              </a>
+            </div>
+          </GlassCard>
+        </div>
+      </SectionShell>
+    </main>
   );
 }
