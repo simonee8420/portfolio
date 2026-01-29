@@ -559,7 +559,7 @@ export default function Home() {
                   fontWeight: 750,
                 }}
               >
-                📧 Slattimore2@student.gsu.edu
+                📧 Simonee8420@gmail.com
               </p>
 
               <p
