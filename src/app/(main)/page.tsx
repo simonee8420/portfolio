@@ -230,7 +230,6 @@ export default function Home() {
           color: rgba(15,15,15,0.88);
         }
 
-        /* OMBRE/GRADIENT BUTTONS (back to the earlier vibe) */
         .pillBtn {
           background: var(--accentGrad);
           color: rgba(255,255,255,0.96);
@@ -322,7 +321,6 @@ export default function Home() {
                 Contact
               </a>
 
-              {/* Resume button uses the same gradient color */}
               <a
                 className="pillBtn"
                 href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
@@ -539,6 +537,7 @@ export default function Home() {
                 textAlign: "center",
               }}
             >
+              {/* UPDATED: clickable email */}
               <p
                 style={{
                   margin: 0,
@@ -547,7 +546,17 @@ export default function Home() {
                   fontWeight: 750,
                 }}
               >
-                📧 Slattimore2@student.gsu.edu
+                📧{" "}
+                <a
+                  href="mailto:simonee8420@gmail.com"
+                  style={{
+                    color: "rgba(20,20,20,0.86)",
+                    textDecoration: "underline",
+                    fontWeight: 900,
+                  }}
+                >
+                  simonee8420@gmail.com
+                </a>
               </p>
 
               <p
