@@ -4,6 +4,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
 type Project =
   | {
@@ -189,6 +190,8 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export default function Home() {
+  const [aboutImgSrc, setAboutImgSrc] = React.useState("/images/og/headshot.jpg");
+
   return (
     <main
       style={{
@@ -227,23 +230,31 @@ export default function Home() {
           color: rgba(15,15,15,0.88);
         }
 
+        /* RESTORED OMBRE / GLOW BUTTON */
         .pillBtn {
-          background: rgba(20,20,20,0.92);
+          background: linear-gradient(135deg, #1a1a1a 0%, #101010 35%, #2b2b2b 100%);
           color: rgba(255,255,255,0.96);
           padding: 12px 18px;
           border-radius: 999px;
           font-weight: 950;
           text-decoration: none;
-          box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+          box-shadow:
+            0 18px 46px rgba(0,0,0,0.18),
+            0 10px 26px rgba(255, 120, 190, 0.12),
+            0 10px 26px rgba(120, 160, 255, 0.12);
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+          transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+          border: 1px solid rgba(255,255,255,0.10);
         }
         .pillBtn:hover { 
           transform: translateY(-1px);
-          background: rgba(15,15,15,0.96);
-          box-shadow: 0 20px 46px rgba(0,0,0,0.14);
+          filter: brightness(1.06);
+          box-shadow:
+            0 22px 56px rgba(0,0,0,0.22),
+            0 12px 30px rgba(255, 120, 190, 0.14),
+            0 12px 30px rgba(120, 160, 255, 0.14);
         }
 
         .softBtn {
@@ -292,12 +303,14 @@ export default function Home() {
                   width: 34,
                   height: 34,
                   borderRadius: 12,
-                  background: "rgba(0,0,0,0.92)",
+                  background:
+                    "linear-gradient(135deg, rgba(255,120,190,0.95), rgba(120,160,255,0.95))",
                   color: "white",
                   display: "grid",
                   placeItems: "center",
                   fontWeight: 950,
                   letterSpacing: "-0.02em",
+                  boxShadow: "0 12px 26px rgba(0,0,0,0.12)",
                 }}
                 aria-label="Logo"
                 title="Simone"
@@ -423,12 +436,13 @@ export default function Home() {
                 }}
               >
                 <Image
-                  src="/images/og/headshot.jpg"
+                  src={aboutImgSrc}
                   alt="Simone Lattimore headshot"
                   width={220}
                   height={220}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   priority
+                  onError={() => setAboutImgSrc("/images/og/profile.jpg")}
                 />
               </div>
 
