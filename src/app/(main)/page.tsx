@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Column, Heading, Text, Button, Line } from "@once-ui-system/core";
+import { Column, Heading, Text, Button } from "@once-ui-system/core";
 
 export default function Home() {
   return (
@@ -122,14 +122,15 @@ export default function Home() {
             }}
           >
             I&apos;m a <b>Georgia State University</b> Computer Science graduate dedicated to understanding the psychological principles behind digital interaction. 
-            I apply programming and behavioral research to design accessible tools that align with human cognition by studying how users process information in digital environments.
+            I apply programming and behavioral research to design accessible tools that align with human cognition.
             <br /><br />
             With a GPA of <b>3.47/4.00</b> and experience ranging from IT infrastructure to graphic design, I focus on building software that solves real-world problems with a human-centered approach.
           </Text>
         </Column>
       </Column>
 
-      <Line background="neutral-alpha-weak" marginY="64" />
+      {/* Horizontal Divider Replacement */}
+      <div style={{ height: '1px', width: '100%', background: 'rgba(255,255,255,0.1)', margin: '64px 0' }} />
 
       {/* ===== Featured Projects Section ===== */}
       <Column
@@ -140,7 +141,6 @@ export default function Home() {
       >
         <Heading variant="display-strong-l" marginBottom="48">Featured Projects</Heading>
 
-        {/* Fixed: gap set to "xl" instead of "70" */}
         <Column gap="xl" align="center">
           {/* Hive Calendar Project */}
           <Column
@@ -157,7 +157,6 @@ export default function Home() {
             <Heading variant="heading-default-l" marginBottom="12">Hive Calendar Project</Heading>
             <Text onBackground="neutral-medium" marginBottom="20">
               Architected an automated dashboard using Power BI and Power Automate to display real-time availability of meeting rooms. 
-              Leveraged HTML/CSS/JS and Java/SQL to deploy status displays for office navigation.
             </Text>
           </Column>
 
@@ -172,37 +171,10 @@ export default function Home() {
               border: "1px solid rgba(255,255,255,0.08)",
             }}
           >
-            <img
-              src="/projects/tiya-preview.png"
-              alt="TIYA Project"
-              style={{ width: "100%", borderRadius: "12px", marginBottom: "20px" }}
-            />
             <Heading variant="heading-default-l" marginBottom="12">Tutor In Your Area (TIYA)</Heading>
             <Text onBackground="neutral-medium">
-              Engineered a platform for students to find tutors based on proximity, translating user needs into clear JS interfaces. 
+              Engineered a platform for students to find tutors based on proximity. 
               Built with Java, JavaScript, MySQL, Firebase, and designed in Figma.
-            </Text>
-          </Column>
-
-          {/* Taste of Freedom */}
-          <Column
-            background="neutral-strong"
-            padding="l"
-            radius="xl"
-            style={{
-              width: "80%",
-              maxWidth: "850px",
-              border: "1px solid rgba(255,255,255,0.08)",
-            }}
-          >
-            <img
-              src="/projects/freedom-preview.png"
-              alt="A Taste of Freedom"
-              style={{ width: "60%", borderRadius: "12px", marginBottom: "20px" }}
-            />
-            <Heading variant="heading-default-l" marginBottom="12">A Taste of Freedom Flyer</Heading>
-            <Text onBackground="neutral-medium">
-              Designed brochures to drive community participation by improving font legibility and visual hierarchy, ensuring invitations remained accessible to a diverse demographic.
             </Text>
           </Column>
         </Column>
@@ -225,7 +197,6 @@ export default function Home() {
         <Column gap="m" align="center">
           <Text variant="body-default-l">📧 Slattimore2@student.gsu.edu</Text>
           <Text variant="body-default-l">🔗 linkedin.com/in/simonee8420</Text>
-          <Text variant="body-default-l">💻 github.com/simonee8420</Text>
 
           <a
             href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
@@ -240,6 +211,7 @@ export default function Home() {
               borderRadius: "30px",
               textDecoration: "none",
               marginTop: "20px",
+              display: "inline-block"
             }}
           >
             📄 View My Résumé
