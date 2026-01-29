@@ -1,5 +1,7 @@
 // src/app/(main)/page.tsx
 
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,7 +28,7 @@ const projects: Project[] = [
     id: "hive",
     title: "Hive Meeting Rooms Display",
     description:
-      "Designed a live meeting room display experience that helps teams quickly understand availability at a glance. Built as a clean, readable interface intended for shared screens, with a focus on clarity, accessibility, and smooth real-world usability.",
+      "A live, TV-friendly meeting room experience designed for quick scanning and clear decision-making. Built to prioritize readability, accessibility, and real-world usability on shared displays.",
     type: "iframe",
     src: "https://hivefs-meetingrooms.netlify.app/",
     height: 380,
@@ -35,7 +37,7 @@ const projects: Project[] = [
     id: "tiya",
     title: "T.I.Y.A – Tutor In Your Area",
     description:
-      "A tutor discovery platform built with React and Firebase that supports ZIP-based location search, sorting, and booking flows. Designed in Figma and implemented with user-centered UI decisions that make searching, comparing, and choosing tutors feel simple and confident.",
+      "A tutor discovery platform built with React and Firebase, featuring ZIP-based location search, sorting, and booking flows. Designed in Figma with user-centered UI decisions that make comparing options feel simple and intentional.",
     type: "image",
     src: "/projects/tiya-preview.png",
     alt: "Tutor In Your Area preview",
@@ -44,7 +46,7 @@ const projects: Project[] = [
     id: "freedom",
     title: "A Taste of Freedom",
     description:
-      "A visual identity and flyer design for a community campaign by Flaming Heart Ministries. The layout balances warmth with legibility, using strong hierarchy and accessible typography so the message is clear, inviting, and easy to scan.",
+      "A visual identity and flyer design for a community campaign by Flaming Heart Ministries. Built with strong hierarchy and accessible typography to keep the message clear, inviting, and easy to scan.",
     type: "image",
     src: "/projects/freedom-preview.png",
     alt: "A Taste of Freedom flyer preview",
@@ -54,7 +56,7 @@ const projects: Project[] = [
 function SectionShell({
   id,
   children,
-  width = "min(1100px, 92%)",
+  width = "min(1120px, 92%)",
 }: {
   id?: string;
   children: React.ReactNode;
@@ -66,6 +68,7 @@ function SectionShell({
       style={{
         width,
         margin: "0 auto",
+        scrollMarginTop: 96,
       }}
     >
       {children}
@@ -83,12 +86,12 @@ function GlassCard({
   return (
     <div
       style={{
-        borderRadius: "28px",
+        borderRadius: 28,
         padding,
-        background: "rgba(255,255,255,0.07)",
-        border: "1px solid rgba(255,255,255,0.10)",
+        background: "rgba(255,255,255,0.62)",
+        border: "1px solid rgba(20, 20, 20, 0.08)",
         boxShadow:
-          "0 30px 90px rgba(0,0,0,0.55), 0 0 70px rgba(255,255,255,0.06)",
+          "0 26px 70px rgba(30, 30, 30, 0.10), 0 1px 0 rgba(255,255,255,0.9) inset",
         backdropFilter: "blur(10px)",
       }}
     >
@@ -98,7 +101,7 @@ function GlassCard({
 }
 
 function ProjectCard({ project }: { project: Project }) {
-  const iframeHeight = project.type === "iframe" ? project.height ?? 360 : 360;
+  const previewHeight = project.type === "iframe" ? project.height ?? 360 : 360;
 
   return (
     <GlassCard padding="26px">
@@ -106,19 +109,19 @@ function ProjectCard({ project }: { project: Project }) {
       <div
         style={{
           width: "100%",
-          borderRadius: "22px",
-          padding: "18px",
-          background: "rgba(255,255,255,0.82)",
-          boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.08)",
+          borderRadius: 22,
+          padding: 16,
+          background: "rgba(255,255,255,0.92)",
+          boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.06)",
         }}
       >
         <div
           style={{
             width: "100%",
-            borderRadius: "16px",
+            borderRadius: 18,
             overflow: "hidden",
             background: "#fff",
-            boxShadow: "0 14px 40px rgba(0,0,0,0.18)",
+            boxShadow: "0 18px 44px rgba(0,0,0,0.10)",
           }}
         >
           {project.type === "iframe" ? (
@@ -128,27 +131,20 @@ function ProjectCard({ project }: { project: Project }) {
               loading="lazy"
               style={{
                 width: "100%",
-                height: `${iframeHeight}px`,
-                border: "0",
+                height: `${previewHeight}px`,
+                border: 0,
                 display: "block",
                 background: "white",
               }}
             />
           ) : (
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                height: `${iframeHeight}px`,
-              }}
-            >
+            <div style={{ position: "relative", width: "100%", height: `${previewHeight}px` }}>
               <Image
                 src={project.src}
                 alt={project.alt}
                 fill
-                sizes="(max-width: 900px) 92vw, 1100px"
+                sizes="(max-width: 900px) 92vw, 1120px"
                 style={{ objectFit: "contain", background: "white" }}
-                priority={project.id === "hive"}
               />
             </div>
           )}
@@ -157,13 +153,13 @@ function ProjectCard({ project }: { project: Project }) {
 
       <h3
         style={{
-          marginTop: "22px",
-          marginBottom: "10px",
-          fontSize: "28px",
-          fontWeight: 900,
-          color: "rgba(255,255,255,0.94)",
-          letterSpacing: "-0.02em",
+          marginTop: 22,
+          marginBottom: 10,
+          fontSize: 30,
+          fontWeight: 950,
+          letterSpacing: "-0.03em",
           textAlign: "center",
+          color: "rgba(20,20,20,0.92)",
         }}
       >
         {project.title}
@@ -172,10 +168,10 @@ function ProjectCard({ project }: { project: Project }) {
       <p
         style={{
           margin: 0,
-          color: "rgba(255,255,255,0.74)",
-          lineHeight: 1.8,
-          fontSize: "16px",
-          maxWidth: "920px",
+          color: "rgba(20,20,20,0.72)",
+          lineHeight: 1.9,
+          fontSize: 16,
+          maxWidth: 980,
           marginLeft: "auto",
           marginRight: "auto",
           textAlign: "center",
@@ -192,13 +188,16 @@ export default function Home() {
     <main
       style={{
         minHeight: "100vh",
-        color: "white",
+        color: "rgba(20,20,20,0.92)",
         background:
-          "radial-gradient(1100px 750px at 50% 0%, rgba(255,255,255,0.10), rgba(0,0,0,0.92))",
-        paddingBottom: "90px",
+          "radial-gradient(900px 520px at 15% 10%, rgba(255, 120, 190, 0.18), rgba(255,255,255,0) 60%)," +
+          "radial-gradient(820px 520px at 85% 15%, rgba(120, 160, 255, 0.20), rgba(255,255,255,0) 62%)," +
+          "radial-gradient(820px 520px at 55% 75%, rgba(255, 210, 120, 0.20), rgba(255,255,255,0) 62%)," +
+          "linear-gradient(180deg, #fbfaf6 0%, #f7f6f2 38%, #f3f2ee 100%)",
+        paddingBottom: 100,
       }}
     >
-      {/* Local CSS for animation + glow */}
+      {/* Local CSS for animation + small polish */}
       <style>{`
         @keyframes floatSlow {
           0% { transform: translateY(0px); }
@@ -206,33 +205,147 @@ export default function Home() {
           100% { transform: translateY(0px); }
         }
         .heroFloat {
-          animation: floatSlow 6.5s ease-in-out infinite;
+          animation: floatSlow 7s ease-in-out infinite;
           will-change: transform;
         }
-        .softGlow {
-          text-shadow: 0 0 26px rgba(255,255,255,0.18);
+        .headlineGlow {
+          text-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
+        .navLink {
+          color: rgba(25,25,25,0.72);
+          text-decoration: none;
+          font-weight: 800;
+          padding: 10px 12px;
+          border-radius: 999px;
+        }
+        .navLink:hover {
+          background: rgba(0,0,0,0.04);
+          color: rgba(15,15,15,0.88);
+        }
+        .pillBtn {
+          background: rgba(15,15,15,0.92);
+          color: white;
+          padding: 12px 18px;
+          border-radius: 999px;
+          font-weight: 900;
+          text-decoration: none;
+          box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .pillBtn:hover { transform: translateY(-1px); }
+        .softBtn {
+          background: rgba(255,255,255,0.78);
+          color: rgba(15,15,15,0.92);
+          padding: 12px 18px;
+          border-radius: 999px;
+          font-weight: 900;
+          text-decoration: none;
+          border: 1px solid rgba(0,0,0,0.08);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .softBtn:hover { background: rgba(255,255,255,0.92); }
       `}</style>
+
+      {/* Sticky Header */}
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
+          padding: "14px 0",
+          backdropFilter: "blur(10px)",
+          background: "rgba(251, 250, 246, 0.70)",
+          borderBottom: "1px solid rgba(0,0,0,0.06)",
+        }}
+      >
+        <SectionShell width="min(1120px, 94%)">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 12,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div
+                style={{
+                  width: 34,
+                  height: 34,
+                  borderRadius: 12,
+                  background: "rgba(0,0,0,0.92)",
+                  color: "white",
+                  display: "grid",
+                  placeItems: "center",
+                  fontWeight: 950,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                S
+              </div>
+              <div style={{ lineHeight: 1.1 }}>
+                <div style={{ fontWeight: 950, letterSpacing: "-0.03em" }}>Simone</div>
+                <div style={{ fontSize: 12, color: "rgba(0,0,0,0.55)", fontWeight: 700 }}>
+                  UI and UX
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <a className="navLink" href="#about">
+                About
+              </a>
+              <a className="navLink" href="#projects">
+                Work
+              </a>
+              <a className="navLink" href="#contact">
+                Contact
+              </a>
+              <a className="softBtn" href="/images/og/SIMONE_LATTIMORE_RESUME.pdf" target="_blank" rel="noopener noreferrer">
+                Résumé
+              </a>
+            </div>
+          </div>
+        </SectionShell>
+      </div>
 
       {/* HERO */}
       <SectionShell>
-        <div style={{ paddingTop: "70px" }}>
-          <div
-            className="heroFloat"
-            style={{
-              textAlign: "center",
-              padding: "42px 18px 22px",
-            }}
-          >
-            <h1
-              className="softGlow"
+        <div style={{ paddingTop: 64, paddingBottom: 28 }}>
+          <div className="heroFloat" style={{ textAlign: "left" }}>
+            <div
               style={{
-                fontSize: "clamp(46px, 5.2vw, 86px)",
-                fontWeight: 950,
-                letterSpacing: "-0.04em",
-                margin: 0,
-                lineHeight: 1.02,
-                color: "rgba(255,255,255,0.92)",
+                display: "inline-flex",
+                gap: 10,
+                alignItems: "center",
+                padding: "8px 12px",
+                borderRadius: 999,
+                background: "rgba(255,255,255,0.70)",
+                border: "1px solid rgba(0,0,0,0.06)",
+                fontWeight: 850,
+                color: "rgba(0,0,0,0.70)",
+              }}
+            >
+              <span style={{ fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                Portfolio
+              </span>
+              <span style={{ width: 4, height: 4, borderRadius: 99, background: "rgba(0,0,0,0.30)" }} />
+              <span style={{ fontSize: 12 }}>UI and UX Design</span>
+            </div>
+
+            <h1
+              className="headlineGlow"
+              style={{
+                marginTop: 18,
+                marginBottom: 14,
+                fontSize: "clamp(48px, 5.2vw, 88px)",
+                fontWeight: 1000,
+                letterSpacing: "-0.05em",
+                lineHeight: 0.98,
               }}
             >
               Welcome to my portfolio.
@@ -242,54 +355,25 @@ export default function Home() {
 
             <p
               style={{
-                margin: "18px auto 0",
+                margin: 0,
                 maxWidth: 820,
-                fontSize: "clamp(16px, 1.8vw, 22px)",
-                lineHeight: 1.7,
-                color: "rgba(255,255,255,0.75)",
+                fontSize: "clamp(16px, 1.7vw, 20px)",
+                lineHeight: 1.8,
+                color: "rgba(20,20,20,0.72)",
+                fontWeight: 700,
               }}
             >
-              I design and build digital experiences that feel intuitive, thoughtful, and worth exploring.
-              Scroll to see projects where research meets real implementation, from interface concepts to working systems.
+              I build human-centered interfaces with engineering discipline and design taste.
+              Explore my work below, from polished UI screens to fully working web experiences.
             </p>
 
-            <div
-              style={{
-                marginTop: "26px",
-                display: "flex",
-                justifyContent: "center",
-                gap: 12,
-              }}
-            >
-              <a
-                href="#projects"
-                style={{
-                  background: "rgba(255,255,255,0.95)",
-                  color: "black",
-                  padding: "12px 22px",
-                  borderRadius: 999,
-                  fontWeight: 900,
-                  textDecoration: "none",
-                  boxShadow: "0 0 22px rgba(255,255,255,0.22)",
-                  display: "inline-block",
-                }}
-              >
-                Explore my work
+            <div style={{ marginTop: 22, display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <a className="pillBtn" href="#projects">
+                View featured work <span aria-hidden>↓</span>
               </a>
 
-              <a
-                href="#about"
-                style={{
-                  background: "rgba(255,255,255,0.08)",
-                  color: "rgba(255,255,255,0.90)",
-                  padding: "12px 22px",
-                  borderRadius: 999,
-                  fontWeight: 800,
-                  textDecoration: "none",
-                  border: "1px solid rgba(255,255,255,0.14)",
-                }}
-              >
-                About me
+              <a className="softBtn" href="#about">
+                Learn more
               </a>
             </div>
           </div>
@@ -298,17 +382,15 @@ export default function Home() {
 
       {/* ABOUT */}
       <SectionShell id="about">
-        <div style={{ marginTop: "60px" }}>
+        <div style={{ marginTop: 34 }}>
           <GlassCard>
             <h2
-              className="softGlow"
               style={{
                 textAlign: "center",
-                fontSize: "clamp(30px, 3.2vw, 44px)",
-                fontWeight: 950,
-                letterSpacing: "-0.03em",
+                fontSize: "clamp(30px, 3vw, 44px)",
+                fontWeight: 1000,
+                letterSpacing: "-0.04em",
                 margin: "0 0 22px",
-                color: "rgba(255,255,255,0.92)",
               }}
             >
               About Me
@@ -317,7 +399,7 @@ export default function Home() {
             <div
               style={{
                 display: "flex",
-                gap: 24,
+                gap: 26,
                 justifyContent: "center",
                 alignItems: "center",
                 flexWrap: "wrap",
@@ -329,10 +411,10 @@ export default function Home() {
                   height: 220,
                   borderRadius: "50%",
                   overflow: "hidden",
-                  boxShadow: "0 0 40px rgba(255,255,255,0.12)",
-                  border: "1px solid rgba(255,255,255,0.12)",
+                  border: "1px solid rgba(0,0,0,0.08)",
+                  boxShadow: "0 18px 44px rgba(0,0,0,0.10)",
+                  background: "rgba(255,255,255,0.55)",
                   flex: "0 0 auto",
-                  background: "rgba(255,255,255,0.06)",
                 }}
               >
                 <Image
@@ -345,40 +427,43 @@ export default function Home() {
                 />
               </div>
 
-              <div style={{ maxWidth: 720 }}>
+              <div style={{ maxWidth: 760 }}>
                 <p
                   style={{
                     margin: 0,
-                    color: "rgba(255,255,255,0.78)",
-                    lineHeight: 1.9,
+                    color: "rgba(20,20,20,0.74)",
+                    lineHeight: 1.95,
                     fontSize: 16,
+                    fontWeight: 650,
                   }}
                 >
-                  I&apos;m Simone Lattimore, a Computer Science graduate focused on UI and UX research and design. I care about the moments where users hesitate, feel confused, or lose trust, and I like turning those moments into clear, calm interactions.
+                  I&apos;m Simone Lattimore, a Computer Science graduate focused on UI and UX design. I care about the moments where users pause, second-guess, or abandon a task, and I like turning those moments into clear, calm interactions.
                 </p>
 
                 <p
                   style={{
-                    marginTop: 16,
+                    marginTop: 14,
                     marginBottom: 0,
-                    color: "rgba(255,255,255,0.78)",
-                    lineHeight: 1.9,
+                    color: "rgba(20,20,20,0.74)",
+                    lineHeight: 1.95,
                     fontSize: 16,
+                    fontWeight: 650,
                   }}
                 >
-                  My goal is to create products that are accessible, efficient, and empowering for everyone. I enjoy connecting behavioral thinking with implementation, so designs are not just visually strong, they also hold up under real constraints and real user needs.
+                  My goal is to create products that are accessible, efficient, and intuitive for everyone. I enjoy connecting behavioral thinking with implementation, so designs are not just visually strong, they also hold up under real constraints and real user needs.
                 </p>
 
                 <p
                   style={{
-                    marginTop: 16,
+                    marginTop: 14,
                     marginBottom: 0,
-                    color: "rgba(255,255,255,0.78)",
-                    lineHeight: 1.9,
+                    color: "rgba(20,20,20,0.74)",
+                    lineHeight: 1.95,
                     fontSize: 16,
+                    fontWeight: 650,
                   }}
                 >
-                  I&apos;m especially interested in how research can improve everyday experiences, like search flows, scheduling, onboarding, and accessibility, so people can move through products with less friction and more confidence.
+                  I&apos;m especially interested in how people navigate everyday experiences like search, scheduling, onboarding, and accessibility, and how small interface decisions can make those experiences feel clearer and easier to complete.
                 </p>
               </div>
             </div>
@@ -388,19 +473,17 @@ export default function Home() {
 
       {/* PROJECTS */}
       <SectionShell id="projects">
-        <div style={{ marginTop: "70px" }}>
+        <div style={{ marginTop: 64 }}>
           <h2
-            className="softGlow"
             style={{
               textAlign: "center",
-              fontSize: "clamp(34px, 4vw, 54px)",
-              fontWeight: 950,
-              letterSpacing: "-0.03em",
-              margin: "0 0 34px",
-              color: "rgba(255,255,255,0.92)",
+              fontSize: "clamp(34px, 3.6vw, 56px)",
+              fontWeight: 1000,
+              letterSpacing: "-0.04em",
+              margin: "0 0 28px",
             }}
           >
-            Featured Projects
+            Featured Work
           </h2>
 
           <div style={{ display: "grid", gap: 34 }}>
@@ -413,41 +496,32 @@ export default function Home() {
 
       {/* CONTACT */}
       <SectionShell id="contact">
-        <div style={{ marginTop: "80px" }}>
+        <div style={{ marginTop: 70 }}>
           <GlassCard>
             <h2
-              className="softGlow"
               style={{
                 textAlign: "center",
-                fontSize: "clamp(28px, 3vw, 42px)",
-                fontWeight: 950,
+                fontSize: "clamp(28px, 3vw, 44px)",
+                fontWeight: 1000,
+                letterSpacing: "-0.04em",
                 margin: "0 0 18px",
-                letterSpacing: "-0.03em",
-                color: "rgba(255,255,255,0.92)",
               }}
             >
-              Contact Me
+              Contact
             </h2>
 
-            <div
-              style={{
-                display: "grid",
-                gap: 10,
-                justifyContent: "center",
-                textAlign: "center",
-              }}
-            >
-              <p style={{ margin: 0, fontSize: 18, color: "rgba(255,255,255,0.82)" }}>
+            <div style={{ display: "grid", gap: 10, justifyContent: "center", textAlign: "center" }}>
+              <p style={{ margin: 0, fontSize: 18, color: "rgba(20,20,20,0.72)", fontWeight: 750 }}>
                 📧 Slattimore2@student.gsu.edu
               </p>
 
-              <p style={{ margin: 0, fontSize: 18, color: "rgba(255,255,255,0.82)" }}>
+              <p style={{ margin: 0, fontSize: 18, color: "rgba(20,20,20,0.72)", fontWeight: 750 }}>
                 🔗{" "}
                 <Link
                   href="https://linkedin.com/in/simonee8420"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: "rgba(255,255,255,0.92)", textDecoration: "underline" }}
+                  style={{ color: "rgba(20,20,20,0.86)", textDecoration: "underline", fontWeight: 900 }}
                 >
                   linkedin.com/in/simonee8420
                 </Link>
@@ -457,20 +531,10 @@ export default function Home() {
                 href="/images/og/SIMONE_LATTIMORE_RESUME.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.95)",
-                  color: "black",
-                  fontSize: 18,
-                  fontWeight: 900,
-                  padding: "12px 24px",
-                  borderRadius: 999,
-                  textDecoration: "none",
-                  marginTop: 12,
-                  display: "inline-block",
-                  boxShadow: "0 0 22px rgba(255,255,255,0.20)",
-                }}
+                className="pillBtn"
+                style={{ marginTop: 10, justifySelf: "center" }}
               >
-                📄 View My Résumé
+                View My Résumé
               </a>
             </div>
           </GlassCard>
